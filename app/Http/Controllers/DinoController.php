@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Dino\StoreRequest;
+use App\Http\Requests\Dino\UpdateRequest;
+use App\Http\Resources\Dino\DinoResource;
 use App\Models\Dino;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DinoController extends Controller
 {
@@ -12,23 +15,7 @@ class DinoController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return DinoResource::collection(Dino::all())->resolve();
     }
 
     /**
@@ -36,7 +23,25 @@ class DinoController extends Controller
      */
     public function show(Dino $dino)
     {
-        //
+        return DinoResource::make($dino)->resolve();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreRequest $request)
+    {
+        $data = $request->validated();
+        $dino = Dino::create($data);
+        return $dino;
     }
 
     /**
@@ -50,9 +55,12 @@ class DinoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dino $dino)
+    public function update(UpdateRequest $request, Dino $dino)
     {
-        //
+        $data = $request->validated();
+        $dino->update($data);
+        return $dino->fresh();
+
     }
 
     /**
@@ -60,6 +68,7 @@ class DinoController extends Controller
      */
     public function destroy(Dino $dino)
     {
-        //
+        $dino->delete();
+        return response(Response::HTTP_OK);
     }
 }
