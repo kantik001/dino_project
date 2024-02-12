@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('total');
             $table->string('product_title');
             $table->string('user');
+            $table->foreignId('user_id')->index()->constrained('users');
             $table->timestamps();
         });
     }

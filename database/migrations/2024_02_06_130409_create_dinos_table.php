@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('price');
             $table->string('categories');
             $table->decimal('discount');
-           // $table->foreignId('building_id')->index()->constrained('buildings');
+            $table->foreignId('user_id')->index()->constrained('users');
+            $table->foreignId('building_id')->index()->constrained('buildings');
 
             $table->timestamps();
         });

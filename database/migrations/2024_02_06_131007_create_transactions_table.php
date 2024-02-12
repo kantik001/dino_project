@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('user');
             $table->decimal('value');
             $table->unsignedSmallInteger('status')->default(1);
+            $table->foreignId('user_id')->index()->constrained('users');
             $table->timestamps();
         });
     }
