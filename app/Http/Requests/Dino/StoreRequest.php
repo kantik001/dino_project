@@ -28,7 +28,6 @@ class StoreRequest extends FormRequest
             'categories'=>'required|string',
             'discount'=>'nullable|numeric',
             'user_id'=>'required|integer|exists:users,id',
-            'building_id'=>'required|integer|exists:buildings,id',
         ];
     }
 }

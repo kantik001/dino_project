@@ -9,10 +9,6 @@ class Building extends Model
 {
     use HasFactory;
 
-    public function dinos() {
-        return $this->hasMany(Dino::class);
-    }
-
     public function user() {
         return $this->belongsTo(User::class);
     }
