@@ -9,8 +9,14 @@ class Building extends Model
 {
     use HasFactory;
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsToMany(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
 
