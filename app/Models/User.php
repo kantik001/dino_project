@@ -45,11 +45,13 @@ class User extends Authenticatable
 
 
     public function buildings() {
-        return $this->hasMany(Building::class);
+        return $this->belongsToMany(Building::class);
     }
+
     public function dinos() {
-        return $this->hasMany(Dino::class);
+        return $this->belongsToMany(Dino::class);
     }
+
 
     public function orders() {
         return $this->hasMany(Order::class);

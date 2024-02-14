@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price');
-            $table->foreignId('user_id')->index()->constrained('users');
+           // $table->foreignId('user_id')->index()->constrained('users');
             $table->timestamps();
         });
     }

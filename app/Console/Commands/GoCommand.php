@@ -2,8 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Building;
-use App\Models\Dino;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class GoCommand extends Command
@@ -27,7 +26,7 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $building = Building::first();
-        dd($building->dino->toArray());
+        $user = User::first();
+        dd($user->buildings->toArray());
     }
 }
