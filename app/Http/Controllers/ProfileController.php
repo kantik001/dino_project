@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Profile\StoreRequest;
+use App\Http\Requests\Profile\UpdateRequest;
+use App\Http\Resources\Profile\ProfileResource;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProfileController extends Controller
 {
@@ -12,7 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return ProfileResource::collection(Profile::all())->resolve();
     }
 
     /**
@@ -26,9 +30,11 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $profile = Profile::create($data);
+        return $profile;
     }
 
     /**
@@ -36,7 +42,7 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //
+        return ProfileResource::make($profile)->resolve();
     }
 
     /**
@@ -50,9 +56,11 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profile $profile)
+    public function update(UpdateRequest $request, Profile $profile)
     {
-        //
+        $data = $request->validated();
+        $profile->update($data);
+        return $profile->fresh();
     }
 
     /**
@@ -60,6 +68,7 @@ class ProfileController extends Controller
      */
     public function destroy(Profile $profile)
     {
-        //
+        $profile->delete();
+        return response(Response::HTTP_OK);
     }
 }

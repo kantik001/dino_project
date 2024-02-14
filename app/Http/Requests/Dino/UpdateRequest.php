@@ -26,7 +26,9 @@ class UpdateRequest extends FormRequest
             'description'=>'required|string',
             'price'=>'required|numeric',
             'categories'=>'required|string',
-            'discount'=>'required|numeric',
+            'discount'=>'nullable|numeric',
+            'user_id'=>'required|integer|exists:users,id',
+            'building_id'=>'required|integer|exists:buildings,id',
         ];
     }
 }

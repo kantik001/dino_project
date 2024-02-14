@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Building\StoreRequest;
+use App\Http\Requests\Building\UpdateRequest;
+use App\Http\Resources\Building\BuildingResource;
+use App\Http\Resources\Dino\DinoResource;
 use App\Models\Building;
+use App\Models\Dino;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BuildingController extends Controller
 {
@@ -12,7 +18,7 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        //
+        return BuildingResource::collection(Building::all())->resolve();
     }
 
     /**
@@ -26,9 +32,11 @@ class BuildingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $building = Building::create($data);
+        return $building;
     }
 
     /**
@@ -36,7 +44,7 @@ class BuildingController extends Controller
      */
     public function show(Building $building)
     {
-        //
+        return BuildingResource::make($building)->resolve();
     }
 
     /**
@@ -50,9 +58,11 @@ class BuildingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Building $building)
+    public function update(UpdateRequest $request, Building $building)
     {
-        //
+        $data = $request->validated();
+        $building->update($data);
+        return $building->fresh();
     }
 
     /**
@@ -60,6 +70,7 @@ class BuildingController extends Controller
      */
     public function destroy(Building $building)
     {
-        //
+        $building->delete();
+        return response(Response::HTTP_OK);
     }
 }

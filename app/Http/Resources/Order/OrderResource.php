@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Dino;
+namespace App\Http\Resources\Order;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DinoResource extends JsonResource
+class OrderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,9 @@ class DinoResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'price' => $this->price,
-            'name' => $this->name,
-            'description' => $this->description,
+            'total' => $this->total,
+            'user' => $this->user,
+            'product_title' => $this->product_title,
         ];
     }
 }

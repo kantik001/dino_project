@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Order\StoreRequest;
+use App\Http\Requests\Order\UpdateRequest;
+use App\Http\Resources\Order\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
@@ -12,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return OrderResource::collection(Order::all())->resolve();
     }
 
     /**
@@ -26,9 +30,11 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $order = Order::create($data);
+        return $order;
     }
 
     /**
@@ -36,7 +42,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return OrderResource::make($order)->resolve();
     }
 
     /**
@@ -50,9 +56,11 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(UpdateRequest $request, Order $order)
     {
-        //
+        $data = $request->validated();
+        $order->update($data);
+        return $order->fresh();
     }
 
     /**
@@ -60,6 +68,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return response(Response::HTTP_OK);
     }
 }

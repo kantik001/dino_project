@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('user');
             $table->decimal('value');
             $table->unsignedSmallInteger('status')->default(1);
             $table->foreignId('user_id')->index()->constrained('users');

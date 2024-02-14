@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Dino;
+namespace App\Http\Resources\Building;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DinoResource extends JsonResource
+class BuildingResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

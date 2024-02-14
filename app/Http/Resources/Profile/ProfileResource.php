@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Dino;
+namespace App\Http\Resources\Profile;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DinoResource extends JsonResource
+class ProfileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,9 @@ class DinoResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'price' => $this->price,
-            'name' => $this->name,
-            'description' => $this->description,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'balance' => $this->balance,
         ];
     }
 }

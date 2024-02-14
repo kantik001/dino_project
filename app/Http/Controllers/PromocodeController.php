@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Promocode\StoreRequest;
+use App\Http\Requests\Promocode\UpdateRequest;
+use App\Http\Resources\Promocode\PromocodeResource;
 use App\Models\Promocode;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PromocodeController extends Controller
 {
@@ -12,7 +15,7 @@ class PromocodeController extends Controller
      */
     public function index()
     {
-        //
+        return PromocodeResource::collection(Promocode::all())->resolve();
     }
 
     /**
@@ -26,9 +29,11 @@ class PromocodeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $promocode = Promocode::create($data);
+        return $promocode;
     }
 
     /**
@@ -36,7 +41,7 @@ class PromocodeController extends Controller
      */
     public function show(Promocode $promocode)
     {
-        //
+        return PromocodeResource::make($promocode)->resolve();
     }
 
     /**
@@ -50,9 +55,11 @@ class PromocodeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Promocode $promocode)
+    public function update(UpdateRequest $request, Promocode $promocode)
     {
-        //
+        $data = $request->validated();
+        $promocode->update($data);
+        return $promocode->fresh();
     }
 
     /**
@@ -60,6 +67,7 @@ class PromocodeController extends Controller
      */
     public function destroy(Promocode $promocode)
     {
-        //
+        $promocode->delete();
+        return response(Response::HTTP_OK);
     }
 }

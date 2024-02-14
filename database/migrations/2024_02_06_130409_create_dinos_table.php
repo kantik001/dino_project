@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price');
             $table->string('categories');
-            $table->decimal('discount');
+            $table->decimal('discount')->nullable();
             $table->foreignId('user_id')->index()->constrained('users');
             $table->foreignId('building_id')->index()->constrained('buildings');
 
