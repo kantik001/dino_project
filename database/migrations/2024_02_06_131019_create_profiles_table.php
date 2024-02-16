@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('gender')->nullable();
             $table->date('birthed_at')->nullable();
             $table->decimal('balance')->nullable();
+            $table->softDeletes();
             $table->foreignId('user_id')->index()->constrained('users');
             $table->timestamps();
         });

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('status')->default(1);
             $table->foreignId('user_id')->index()->constrained('users');
             $table->foreignId('order_id')->index()->constrained('orders');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

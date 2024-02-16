@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Dino;
+use App\Models\Promocode;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -27,7 +28,7 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $dino = Dino::find(1);
-        dd($dino->tags->toArray());
+        $promocode = Promocode::first();
+        dd($promocode->expired_at->toDateString());
     }
 }

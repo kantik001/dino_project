@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('value');
             $table->date('expired_at');
             $table->integer('limit_from');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

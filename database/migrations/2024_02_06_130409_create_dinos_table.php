@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->string('categories');
             $table->decimal('discount')->nullable();
+            $table->softDeletes();
            // $table->foreignId('user_id')->index()->constrained('users');
 
             $table->timestamps();
