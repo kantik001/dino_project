@@ -28,7 +28,7 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $dino = Dino::first();
-        dd($dino->half_discount);
+        $promocode = Promocode::first();
+        dd($promocode->expired_at->toDateString());
     }
 }
