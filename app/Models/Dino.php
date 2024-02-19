@@ -11,6 +11,8 @@ class Dino extends Model
     use HasFactory;
     use SoftDeletes;
 
+   // protected $appends = ['half_discount']; (включить, если не сработает getAttribute)
+
     public function users()
     {
         return $this->belongsToMany(User::class);
@@ -19,6 +21,11 @@ class Dino extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function getHalfDiscountAttribute()
+    {
+        return $this->discount/2;
     }
 
 }
