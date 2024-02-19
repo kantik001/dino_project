@@ -18,7 +18,8 @@ class TransactionResource extends JsonResource
             'id' => $this->id,
             'status' => $this->status,
             'value' => $this->value,
-            'user' => $this->user,
+            'user_id' => $this->user_id,
+            'order_id' => $this->order_id,
         ];
     }
 }

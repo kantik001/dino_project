@@ -18,7 +18,7 @@ class PromocodeResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'value' => $this->value,
-            'user' => $this->user,
+            'user_id' => $this->user_id,
         ];
     }
 }

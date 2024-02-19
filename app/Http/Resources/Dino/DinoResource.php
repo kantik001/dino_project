@@ -19,6 +19,8 @@ class DinoResource extends JsonResource
             'price' => $this->price,
             'name' => $this->name,
             'description' => $this->description,
+            'categories' => $this->categories,
+            'discount' => $this->discount,
         ];
     }
 }

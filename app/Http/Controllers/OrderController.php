@@ -6,11 +6,14 @@ use App\Http\Requests\Order\StoreRequest;
 use App\Http\Requests\Order\UpdateRequest;
 use App\Http\Resources\Order\OrderResource;
 use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
+    //public function __construct(private OrderService $orderService) {  } - реализация через $this
+
     /**
      * Display a listing of the resource.
      */
@@ -59,8 +62,10 @@ class OrderController extends Controller
     public function update(UpdateRequest $request, Order $order)
     {
         $data = $request->validated();
-        $order->update($data);
-        return $order->fresh();
+        //$order = $this->orderService->update($order, $data); - другой подход
+        $order = OrderService::update($order, $data);
+        return OrderResource::make($order);
+
     }
 
     /**
