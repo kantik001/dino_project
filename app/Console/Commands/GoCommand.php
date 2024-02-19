@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Dino;
+use App\Models\Order;
 use App\Models\Promocode;
 use App\Models\User;
 use Illuminate\Console\Command;
@@ -28,7 +29,9 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $promocode = Promocode::first();
-        dd($promocode->expired_at->toDateString());
+        $from = '50';
+        $to = '200';
+        $orders = Order::failedOrders($from,$to)->get();
+        dd($orders->toArray());
     }
 }

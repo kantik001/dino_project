@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total');
-            $table->string('product_title');
+            $table->decimal('total')->nullable();
+            $table->unsignedSmallInteger('status')->default(1);
             $table->softDeletes();
             $table->foreignId('user_id')->index()->constrained('users');
             $table->timestamps();
