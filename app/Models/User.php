@@ -12,7 +12,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -69,6 +68,11 @@ class User extends Authenticatable
 
     public function profiles() {
         return $this->hasOne(Profile::class);
+    }
+
+    public function getFormatNameAttribute()
+    {
+        return $this->name;
     }
 
 

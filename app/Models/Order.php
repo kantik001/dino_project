@@ -16,6 +16,13 @@ class Order extends Model
     const STATUS_SUCCESS = 2;
     const STATUS_FAILED = 3;
 
+    const STATUSES = [
+        self::STATUS_CREATED => 'создан',
+        self::STATUS_SUCCESS => 'оплачен',
+        self::STATUS_FAILED => 'ошибка',
+
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }
@@ -29,5 +36,10 @@ class Order extends Model
         return $builder->where('status', Order::STATUS_FAILED)
             ->where('total', '>', $from)
             ->where('total', '<', $to);
+    }
+
+    public function getFormatTotalAttribute()
+    {
+        return number_format($this->total, 2);
     }
 }

@@ -21,5 +21,10 @@ class Building extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
+    public function getFormatPriceAttribute()
+    {
+        return number_format($this->price, 2);
+    }
+
 
 }

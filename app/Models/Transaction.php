@@ -18,4 +18,9 @@ class Transaction extends Model
     public function orders() {
         return $this->belongsTo(Order::class);
     }
+
+    public function getFormatValueAttribute()
+    {
+        return number_format($this->value, 2);
+    }
 }

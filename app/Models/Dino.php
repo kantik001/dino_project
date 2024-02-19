@@ -28,4 +28,15 @@ class Dino extends Model
         return $this->discount/2;
     }
 
+    public function getFormatPriceAttribute()
+    {
+        return number_format($this->price, 2);
+    }
+
+    public function getFormatDiscountAttribute()
+    {
+        return number_format($this->discount, 2);
+    }
+
+
 }

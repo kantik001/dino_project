@@ -19,4 +19,9 @@ class Promocode extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function getFormatValueAttribute()
+    {
+        return number_format($this->value, 2);
+    }
 }

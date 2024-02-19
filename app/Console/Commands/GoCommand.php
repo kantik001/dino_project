@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Mappers\IndexMapper;
 use App\Models\Dino;
 use App\Models\Order;
+use App\Models\Profile;
 use App\Models\Promocode;
 use App\Models\User;
 use Illuminate\Console\Command;
@@ -30,9 +31,7 @@ class GoCommand extends Command
      */
     public function handle()
     {
-
-        $orders = Order::all();
-        $orders = IndexMapper::index($orders);
-        dd($orders->toArray());
+        $user = User::first();
+        dd($user->format_name);
     }
 }

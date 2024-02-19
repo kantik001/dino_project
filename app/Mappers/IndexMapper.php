@@ -13,9 +13,8 @@ class IndexMapper
         foreach ($orders as $order) {
             $result[$order->total][] = $order;
         }
-        dd($result);
-        return $result;
 
+        return $result;
 
     }
 
