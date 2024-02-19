@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Mappers\IndexMapper;
 use App\Models\Dino;
 use App\Models\Order;
 use App\Models\Promocode;
@@ -29,9 +30,9 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $from = '50';
-        $to = '200';
-        $orders = Order::failedOrders($from,$to)->get();
+
+        $orders = Order::all();
+        $orders = IndexMapper::index($orders);
         dd($orders->toArray());
     }
 }
