@@ -42,4 +42,9 @@ class Order extends Model
     {
         return number_format($this->total, 2);
     }
+
+    public function getStatusTitleAttribute()
+    {
+        return self::STATUSES[$this->status];
+    }
 }

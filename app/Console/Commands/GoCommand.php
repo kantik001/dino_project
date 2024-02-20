@@ -31,7 +31,7 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $user = User::first();
-        dd($user->format_name);
+        $profile = Profile::first();
+        dd($profile->gender_title);
     }
 }

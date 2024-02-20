@@ -36,4 +36,9 @@ class Profile extends Model
     {
         return number_format($this->balance, 2);
     }
+
+    public function getGenderTitleAttribute()
+    {
+        return self::GENDERS[$this->gender];
+    }
 }
