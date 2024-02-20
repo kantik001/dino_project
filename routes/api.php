@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromocodeController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +26,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'auth.admin'], function ()
+Route::group(['middleware' => 'api'], function () {
+    Route::post('login', [AuthController::class, 'login']);
+});
+
+
+Route::group(['middleware' => ['jwt.auth', 'auth.admin']], function ()
 {
+    Route::post('logout',  [AuthController::class, 'logout']);
+    Route::post('refresh',  [AuthController::class, 'refresh']);
+    Route::post('me',  [AuthController::class, 'me']);
+
     Route::apiResource('/dinos', DinoController::class);
     Route::apiResource('/buildings', BuildingController::class);
     Route::apiResource('/orders', OrderController::class);

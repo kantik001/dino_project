@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Promocode;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class GoCommand extends Command
 {
@@ -31,7 +32,11 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $profile = Profile::first();
-        dd($profile->gender_title);
+        User::first()->update([
+            'password' => Hash::make('123123123')
+        ]);
+        // $orders = IndexMapper::index($orders);
+        dd(222);
+
     }
 }

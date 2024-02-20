@@ -15,6 +15,11 @@ class IsAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        return auth()->user()->is_admin ?
+            $next($request) :
+            \response()->json([
+                'message' => 'forbidden'
+            ], Response::HTTP_FORBIDDEN);
+
     }
 }
