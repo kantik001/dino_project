@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\BuildingController;
-use App\Http\Controllers\DinoController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PromocodeController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Admin\BuildingController;
+use App\Http\Controllers\Admin\DinoController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PromocodeController;
+use App\Http\Controllers\Admin\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

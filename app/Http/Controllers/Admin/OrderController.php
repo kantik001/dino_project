@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreRequest;
 use App\Http\Requests\Order\UpdateRequest;
 use App\Http\Resources\Order\OrderResource;
 use App\Models\Order;
 use App\Services\OrderService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class OrderController extends Controller

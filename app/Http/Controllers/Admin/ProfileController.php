@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\StoreRequest;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Http\Resources\Profile\ProfileResource;
 use App\Models\Profile;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ProfileController extends Controller

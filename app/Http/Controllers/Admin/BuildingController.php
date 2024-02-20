@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Building\StoreRequest;
 use App\Http\Requests\Building\UpdateRequest;
 use App\Http\Resources\Building\BuildingResource;
-use App\Http\Resources\Dino\DinoResource;
 use App\Models\Building;
-use App\Models\Dino;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class BuildingController extends Controller
