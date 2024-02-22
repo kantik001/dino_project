@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'profile' => ProfileResource::make($this->profile)->resolve(),
+            'token' => auth()->attempt(request(['email', 'password']))
         ];
 
     }
