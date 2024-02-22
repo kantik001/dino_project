@@ -55,6 +55,7 @@ Route::group(['middleware' => ['jwt.auth', 'auth.admin'], 'prefix' => 'admin'], 
 });
 
 Route::post('/users', [\App\Http\Controllers\UserController::class, 'store']);
+Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy']);
 
 
 

@@ -68,7 +68,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Promocode::class);
     }
 
-    public function profiles() {
+    public function profile() {
         return $this->hasOne(Profile::class);
     }
 
