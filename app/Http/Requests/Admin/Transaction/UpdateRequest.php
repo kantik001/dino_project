@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Admin\Transaction;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,11 +22,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'password' => 'required|string|confirmed',
-            'password_confirmation' => 'required|string',
+            'value'=>'required|numeric',
+            'status'=>'required|integer',
+            'user_id'=>'required|integer|exists:users,id',
+            'order_id'=>'required|integer|exists:orders,id',
         ];
-
     }
 }

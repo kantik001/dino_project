@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Building\StoreRequest;
-use App\Http\Requests\Building\UpdateRequest;
+use App\Http\Requests\Admin\Building\StoreRequest;
+use App\Http\Requests\Admin\Building\UpdateRequest;
 use App\Http\Resources\Building\BuildingResource;
 use App\Models\Building;
 use Illuminate\Http\Response;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Building;
+namespace App\Http\Requests\Admin\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,9 +22,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string',
-            'description'=>'required|string',
-            'price'=>'required|numeric',
+            'total'=>'required|numeric',
+            'product_title'=>'required|string',
             'user_id'=>'required|integer|exists:users,id',
         ];
     }

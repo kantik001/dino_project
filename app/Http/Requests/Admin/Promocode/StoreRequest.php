@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Order;
+namespace App\Http\Requests\Admin\Promocode;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,8 +22,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'total'=>'required|numeric',
-            'product_title'=>'required|string',
+            'code'=>'required|string',
+            'value'=>'required|numeric',
+            'expired_at'=>'required|date',
+            'limit_from'=>'required|integer',
             'user_id'=>'required|integer|exists:users,id',
         ];
     }

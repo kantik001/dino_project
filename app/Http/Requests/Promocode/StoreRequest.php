@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Promocode;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,11 +22,21 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code'=>'required|string',
-            'value'=>'required|numeric',
-            'expired_at'=>'required|date',
-            'limit_from'=>'required|integer',
-            'user_id'=>'required|integer|exists:users,id',
+            'name' => 'required|string',
+            'email' => 'required|string',
+            'password' => 'required|string|same:password_confirmation',
+            'password_confirmation' => 'required|string',
         ];
+
     }
+
+    protected function passedValidation()
+    {
+        return $this->replace([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+        ]);
+    }
+
 }

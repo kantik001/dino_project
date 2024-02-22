@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\StoreRequest;
-use App\Http\Requests\Profile\UpdateRequest;
+use App\Http\Requests\Admin\Profile\StoreRequest;
+use App\Http\Requests\Admin\Profile\UpdateRequest;
 use App\Http\Resources\Profile\ProfileResource;
 use App\Models\Profile;
 use Illuminate\Http\Response;

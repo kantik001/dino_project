@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Order;
+namespace App\Http\Requests\Admin\Dino;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,8 +22,11 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'total'=>'required|numeric',
-            'product_title'=>'required|string',
+            'name'=>'required|string',
+            'description'=>'required|string',
+            'price'=>'required|numeric',
+            'categories'=>'required|string',
+            'discount'=>'nullable|numeric',
             'user_id'=>'required|integer|exists:users,id',
         ];
     }

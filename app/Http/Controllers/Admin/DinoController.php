@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dino\StoreRequest;
-use App\Http\Requests\Dino\UpdateRequest;
+use App\Http\Requests\Admin\Dino\StoreRequest;
+use App\Http\Requests\Admin\Dino\UpdateRequest;
 use App\Http\Resources\Dino\DinoResource;
 use App\Models\Dino;
 use Illuminate\Http\Response;

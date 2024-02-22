@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Profile;
+namespace App\Http\Requests\Admin\Dino;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,11 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login'=>'required|string',
-            'first_name'=>'nullable|string',
-            'last_name'=>'nullable|string',
-            'gender'=>'nullable|integer',
-            'balance'=>'nullable|integer',
-            'birthed_at'=>'nullable|date',
+            'name'=>'required|string',
+            'description'=>'required|string',
+            'price'=>'required|numeric',
+            'categories'=>'required|string',
+            'discount'=>'nullable|numeric',
             'user_id'=>'required|integer|exists:users,id',
         ];
     }

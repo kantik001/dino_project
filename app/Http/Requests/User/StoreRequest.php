@@ -24,9 +24,19 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|string',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string|same:password_confirmation',
             'password_confirmation' => 'required|string',
         ];
 
     }
+
+    protected function passedValidation()
+    {
+        return $this->replace([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+        ]);
+    }
+
 }

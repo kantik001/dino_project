@@ -30,13 +30,20 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
-
-Route::group(['middleware' => ['jwt.auth', 'auth.admin']], function ()
+Route::group(['middleware' => ['jwt.auth']], function ()
 {
     Route::post('logout',  [AuthController::class, 'logout']);
     Route::post('refresh',  [AuthController::class, 'refresh']);
     Route::post('me',  [AuthController::class, 'me']);
 
+    Route::patch('/promocodes/update_user',  [\App\Http\Controllers\PromocodeController::class, 'updateUser']);
+    Route::delete('/users', [\App\Http\Controllers\UserController::class, 'destroy']);
+
+
+});
+
+Route::group(['middleware' => ['jwt.auth', 'auth.admin'], 'prefix' => 'admin'], function ()
+{
     Route::apiResource('/dinos', DinoController::class);
     Route::apiResource('/buildings', BuildingController::class);
     Route::apiResource('/orders', OrderController::class);
@@ -46,6 +53,8 @@ Route::group(['middleware' => ['jwt.auth', 'auth.admin']], function ()
     Route::apiResource('/users', UserController::class);
 
 });
+
+Route::post('/users', [\App\Http\Controllers\UserController::class, 'store']);
 
 
 

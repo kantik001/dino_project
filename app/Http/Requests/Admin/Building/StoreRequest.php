@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dino;
+namespace App\Http\Requests\Admin\Building;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,8 +25,6 @@ class StoreRequest extends FormRequest
             'name'=>'required|string',
             'description'=>'required|string',
             'price'=>'required|numeric',
-            'categories'=>'required|string',
-            'discount'=>'nullable|numeric',
             'user_id'=>'required|integer|exists:users,id',
         ];
     }
