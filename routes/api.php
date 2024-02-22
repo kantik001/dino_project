@@ -38,8 +38,6 @@ Route::group(['middleware' => 'jwt.auth'], function ()
 
     Route::patch('/promocodes/update_user',  [\App\Http\Controllers\PromocodeController::class, 'updateUser']);
     Route::delete('/users', [\App\Http\Controllers\UserController::class, 'destroy']);
-
-
 });
 
 Route::group(['middleware' => ['jwt.auth', 'auth.admin'], 'prefix' => 'admin'], function ()
@@ -51,11 +49,10 @@ Route::group(['middleware' => ['jwt.auth', 'auth.admin'], 'prefix' => 'admin'], 
     Route::apiResource('/promocodes', PromocodeController::class);
     Route::apiResource('/transactions', TransactionController::class)->except('destroy');
     Route::apiResource('/users', UserController::class);
-
 });
 
 Route::post('/users', [\App\Http\Controllers\UserController::class, 'store']);
-Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy']);
+//Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy']);
 
 
 
