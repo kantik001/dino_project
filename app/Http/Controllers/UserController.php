@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\DestroyDinoInCartRequest;
+use App\Http\Requests\User\StoreDinoToCartRequest;
 use App\Http\Requests\User\StoreRequest;
-use App\Http\Resources\User\UserResource;
+use App\Http\Requests\User\UpdateDinoToCartRequest;
+use App\Http\Requests\User\UpdateRequest;
+use App\Http\Resources\User\StoreUserResource;
+use App\Http\Resources\User\UpdateUserResource;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
@@ -13,7 +19,15 @@ class UserController extends Controller
     {
         $data = $request->validationData();
         $user = User::create($data);
-        return UserResource::make($user)->resolve();
+        return StoreUserResource::make($user)->resolve();
+    }
+
+    public function update(UpdateRequest $request)
+    {
+        $data = $request->validated();
+        auth()->user()->update($data);
+        return UpdateUserResource::make(auth()->user())->resolve();
+
     }
 
     public function destroy()
@@ -22,6 +36,27 @@ class UserController extends Controller
         return response()->json([
             'message' => 'user successfully deleted'
         ], Response::HTTP_OK);
+    }
+
+    public function storeDinoToCart(StoreDinoToCartRequest $request)
+    {
+        $data = $request->validated();
+        auth()->user()->dinosInCart()->syncWithoutDetaching($data['dino_id']);
+        return response()->json(['message' => 'Дино добавлен'], Response::HTTP_OK);
+    }
+
+    public function updateDinoInCart(UpdateDinoToCartRequest $request)
+    {
+        $data = $request->validated();
+        auth()->user()->dinosInCart()->updateExistingPivot($data['dino_id'], ['qty' => $data['qty']]);
+        return response()->json(['message' => 'Количество дино изменено'], Response::HTTP_OK);
+    }
+
+    public function destroyDinoInCart(DestroyDinoInCartRequest $request)
+    {
+        $data = $request->validated();
+        auth()->user()->dinosInCart()->detach($data['dino_id']);
+        return response()->json(['message' => 'Дино удален'], Response::HTTP_OK);
     }
 
 }

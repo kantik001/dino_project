@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Profile extends Model
 {
     use HasFactory;
-    //use SoftDeletes;
+    use SoftDeletes;
 
     const MALE = 1;
     const FEMALE = 2;

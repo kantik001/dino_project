@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buildings', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('price')->nullable();
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('dino_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('order_id')->nullable()->change();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buildings');
+        Schema::table('dino_user', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('dino_id')->index()->constrained('dinos');
             $table->foreignId('user_id')->index()->constrained('users');
+            $table->unsignedBigInteger('qty')->default(1);
+            $table->foreignId('order_id')->index()->constrained('orders');
             $table->timestamps();
         });
     }

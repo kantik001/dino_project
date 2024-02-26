@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('building_id')->index()->constrained('buildings');
             $table->foreignId('user_id')->index()->constrained('users');
+            $table->unsignedBigInteger('qty')->default(1);
+            $table->foreignId('order_id')->index()->constrained('orders');
             $table->timestamps();
         });
     }

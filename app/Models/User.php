@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
-    //use SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +53,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function dinos() {
         return $this->belongsToMany(Dino::class);
+    }
+
+    public function dinosInCart() {
+        return $this->belongsToMany(Dino::class)->wherePivot('order_id',  null);
     }
 
 

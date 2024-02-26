@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('dinos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->decimal('price');
-            $table->string('categories');
+            $table->text('description')->nullable();
+            $table->decimal('price')->nullable();
+            $table->string('categories')->nullable();
             $table->decimal('discount')->nullable();
             $table->softDeletes();
-           // $table->foreignId('user_id')->index()->constrained('users');
 
             $table->timestamps();
         });
