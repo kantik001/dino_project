@@ -8,6 +8,7 @@ use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateDinoToCartRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\StoreUserResource;
+use App\Http\Resources\User\StoreWithTokenUserResource;
 use App\Http\Resources\User\UpdateUserResource;
 use App\Models\User;
 use Illuminate\Http\Response;
@@ -19,7 +20,7 @@ class UserController extends Controller
     {
         $data = $request->validationData();
         $user = User::create($data);
-        return StoreUserResource::make($user)->resolve();
+        return StoreWithTokenUserResource::make($user)->resolve();
     }
 
     public function update(UpdateRequest $request)
@@ -41,7 +42,7 @@ class UserController extends Controller
     public function storeDinoToCart(StoreDinoToCartRequest $request)
     {
         $data = $request->validated();
-        auth()->user()->dinosInCart()->syncWithoutDetaching($data['dino_id']);
+        auth()->user()->dinosInCart()->syncWithoutDetaching([$data['dino_id'] => $data]);
         return response()->json(['message' => 'Дино добавлен'], Response::HTTP_OK);
     }
 

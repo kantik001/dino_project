@@ -6,7 +6,7 @@ use App\Http\Resources\Profile\ProfileResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StoreUserResource extends JsonResource
+class StoreWithTokenUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,7 +20,7 @@ class StoreUserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'profile' => ProfileResource::make($this->profile)->resolve(),
-
+            'token' => auth()->attempt(request(['email', 'password']))
         ];
     }
 
