@@ -36,13 +36,18 @@ Route::group(['middleware' => 'jwt.auth'], function ()
     Route::post('refresh',  [AuthController::class, 'refresh']);
     Route::post('me',  [AuthController::class, 'me']);
 
-    Route::patch('/promocodes/update-user',  [\App\Http\Controllers\PromocodeController::class, 'updateUser']);
+    Route::patch('/promocodes/user',  [\App\Http\Controllers\PromocodeController::class, 'updateUser']);
     Route::delete('/users', [\App\Http\Controllers\UserController::class, 'destroy']);
     Route::patch('/users', [\App\Http\Controllers\UserController::class, 'update']);
 
     Route::post('/users/dino-to-cart', [\App\Http\Controllers\UserController::class, 'storeDinoToCart']);
     Route::patch('/users/dino-in-cart', [\App\Http\Controllers\UserController::class, 'updateDinoInCart']);
     Route::delete('/users/dino-in-cart', [\App\Http\Controllers\UserController::class, 'destroyDinoInCart']);
+
+    Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'store']);
+    Route::patch('/orders/{order}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus']);
+    Route::patch('/orders/{order}/dinos', [\App\Http\Controllers\OrderController::class, 'updateDinos']);
+
 });
 
 Route::group(['middleware' => ['jwt.auth', 'auth.admin'], 'prefix' => 'admin'], function ()
