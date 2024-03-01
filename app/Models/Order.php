@@ -23,6 +23,22 @@ class Order extends Model
 
     ];
 
+    public function dinos()
+    {
+        return $this->belongsToMany(Dino::class, 'dino_user', 'order_id', 'dino_id')
+            ->withPivot('qty');
+    }
+
+    public function getTotalPriceAttribute(): int
+    {
+        $total = 0;
+        foreach ($this->products as $product) {
+            $total += (int) $product->price * $product->pivot->qty;
+        }
+        return $total;
+    }
+
+
     public function user() {
         return $this->belongsTo(User::class);
     }

@@ -44,9 +44,16 @@ Route::group(['middleware' => 'jwt.auth'], function ()
     Route::patch('/users/dino-in-cart', [\App\Http\Controllers\UserController::class, 'updateDinoInCart']);
     Route::delete('/users/dino-in-cart', [\App\Http\Controllers\UserController::class, 'destroyDinoInCart']);
 
-    Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'store']);
-    Route::patch('/orders/{order}/status', [\App\Http\Controllers\OrderController::class, 'updateStatus']);
-    Route::patch('/orders/{order}/dinos', [\App\Http\Controllers\OrderController::class, 'updateDinos']);
+    Route::get('orders', [\App\Http\Controllers\OrderController::class, 'index']);
+    Route::get('orders/{order}', [\App\Http\Controllers\OrderController::class, 'show']);
+    Route::patch('orders/{order}/dino', [\App\Http\Controllers\OrderController::class, 'updateDino']);
+    Route::delete('orders/{order}/dino', [\App\Http\Controllers\OrderController::class, 'destroyDino']);
+    Route::delete('orders/{order}', [\App\Http\Controllers\OrderController::class, 'destroy']);
+    Route::post('/orders/{order}/transactions', [\App\Http\Controllers\OrderController::class, 'storeTransaction']);
+
+    Route::post('/transactions', [\App\Http\Controllers\TransactionController::class, 'store']);
+    Route::patch('/transactions/{transaction}/status-success', [\App\Http\Controllers\TransactionController::class, 'updateStatusSuccess']);
+
 
 });
 

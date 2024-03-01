@@ -59,6 +59,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Dino::class)->wherePivot('order_id',  null);
     }
 
+    public function orderDinos(Order $order) {
+        return $this->belongsToMany(Dino::class)->wherePivot('order_id',  $order->id);
+    }
+
 
     public function orders() {
         return $this->hasMany(Order::class);

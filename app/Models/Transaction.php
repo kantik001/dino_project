@@ -11,6 +11,27 @@ class Transaction extends Model
     use HasFactory;
     use SoftDeletes;
 
+    const TYPE_DEBET = 1;
+    const TYPE_CREDIT = 2;
+
+    const STATUS_CREATED = 1;
+    const STATUS_SUCCESS = 2;
+    const STATUS_FAILED = 3;
+    const STATUS_EXTERNAL_FAILED = 4;
+
+    const TYPES = [
+        self::TYPE_DEBET => 'Пополнение',
+        self::TYPE_CREDIT => 'Оплата услуг',
+    ];
+
+    const STATUSES = [
+        self::STATUS_CREATED => 'Создана',
+        self::STATUS_SUCCESS => 'Успешно',
+        self::STATUS_FAILED => 'Ошибка',
+        self::STATUS_EXTERNAL_FAILED => 'Ошибка у платежки',
+    ];
+
+
     public function user() {
         return $this->belongsTo(User::class);
     }
