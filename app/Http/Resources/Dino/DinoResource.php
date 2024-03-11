@@ -21,6 +21,7 @@ class DinoResource extends JsonResource
             'description' => $this->description,
             'categories' => $this->categories,
             'discount' => $this->discount,
+            'created_at' => $this->created_at->toDateString()
         ];
     }
 }

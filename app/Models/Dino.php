@@ -10,6 +10,7 @@ class Dino extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasFilter;
 
    // protected $appends = ['half_discount']; (включить, если не сработает getAttribute)
 

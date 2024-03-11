@@ -57,7 +57,7 @@ Route::group(['middleware' => 'jwt.auth'], function ()
 
 });
 
-Route::group(['middleware' => ['jwt.auth', 'auth.admin'], 'prefix' => 'admin'], function ()
+Route::group([ 'prefix' => 'admin'], function ()
 {
     Route::apiResource('/dinos', DinoController::class);
     Route::apiResource('/buildings', BuildingController::class);
@@ -70,6 +70,6 @@ Route::group(['middleware' => ['jwt.auth', 'auth.admin'], 'prefix' => 'admin'], 
 
 Route::post('/users', [\App\Http\Controllers\UserController::class, 'store']);
 //Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy']);
-
+//'middleware' => ['jwt.auth', 'auth.admin'],
 
 

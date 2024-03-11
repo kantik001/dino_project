@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Dino;
+namespace App\Http\Requests\Filters\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,11 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string',
-            'description'=>'nullable|string',
-            'price'=>'required|numeric',
-            'categories'=>'nullable|string',
-            'discount'=>'nullable|numeric',
-            'user_id'=>'nullable|integer|exists:users,id',
+            'total'=> 'nullable|string',
+            'status'=> 'nullable|string',
+            'created_from'=> 'nullable|date_format:Y-m-d',
+            'created_to'=> 'nullable|date_format:Y-m-d',
+            'user_id' => 'nullable|integer|exists:users,id'
         ];
     }
 }

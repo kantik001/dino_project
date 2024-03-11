@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Order\StoreRequest;
 use App\Http\Requests\Admin\Order\UpdateRequest;
+use App\Http\Requests\Filters\Order\IndexRequest;
+use App\Http\Resources\Dino\DinoResource;
 use App\Http\Resources\Order\OrderResource;
+use App\Models\Dino;
 use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Response;
@@ -17,9 +20,11 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
-        return OrderResource::collection(Order::all())->resolve();
+        $data = $request->validated();
+        $orders = Order::filter($data)->get();
+        return OrderResource::collection($orders)->resolve();
     }
 
     /**

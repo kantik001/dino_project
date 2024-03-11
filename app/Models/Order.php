@@ -11,6 +11,7 @@ class Order extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasFilter;
 
     const STATUS_CREATED = 1;
     const STATUS_SUCCESS = 2;

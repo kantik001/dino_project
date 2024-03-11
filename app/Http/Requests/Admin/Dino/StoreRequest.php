@@ -23,11 +23,11 @@ class StoreRequest extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'description'=>'required|string',
+            'description'=>'nullable|string',
             'price'=>'required|numeric',
-            'categories'=>'required|string',
+            'categories'=>'nullable|string',
             'discount'=>'nullable|numeric',
-            'user_id'=>'required|integer|exists:users,id',
+            'user_id'=>'nullable|integer|exists:users,id',
         ];
     }
 }

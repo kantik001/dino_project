@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Dino\StoreRequest;
 use App\Http\Requests\Admin\Dino\UpdateRequest;
+use App\Http\Requests\Filters\Dino\IndexRequest;
 use App\Http\Resources\Dino\DinoResource;
 use App\Models\Dino;
 use Illuminate\Http\Response;
@@ -14,9 +15,12 @@ class DinoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
-        return DinoResource::collection(Dino::all())->resolve();
+        $data = $request->validated();
+        $dinos = Dino::filter($data)->get();
+        return DinoResource::collection($dinos)->resolve();
+
     }
 
     /**
