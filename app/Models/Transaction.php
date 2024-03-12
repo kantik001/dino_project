@@ -10,6 +10,7 @@ class Transaction extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasFilter;
 
     const TYPE_DEBET = 1;
     const TYPE_CREDIT = 2;

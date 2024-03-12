@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
+use App\Http\Requests\Filters\User\IndexRequest;
 use App\Http\Resources\User\StoreUserResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Response;
 
@@ -14,9 +16,11 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
-        return StoreUserResource::collection(User::all())->resolve();
+        $data = $request->validated();
+        $users = User::filter($data)->get();
+        return UserResource::collection($users)->resolve();
     }
 
     /**

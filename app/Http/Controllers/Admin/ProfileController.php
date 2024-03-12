@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Profile\StoreRequest;
 use App\Http\Requests\Admin\Profile\UpdateRequest;
+use App\Http\Requests\Filters\Profile\IndexRequest;
+use App\Http\Resources\Dino\DinoResource;
 use App\Http\Resources\Profile\ProfileResource;
+use App\Models\Dino;
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 class ProfileController extends Controller
@@ -14,9 +18,11 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
-        return ProfileResource::collection(Profile::all())->resolve();
+        $data = $request->validated();
+        $profiles = Profile::filter($data)->get();
+        return ProfileResource::collection($profiles)->resolve();
     }
 
     /**

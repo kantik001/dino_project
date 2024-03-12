@@ -10,6 +10,7 @@ class Profile extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasFilter;
 
     const MALE = 1;
     const FEMALE = 2;

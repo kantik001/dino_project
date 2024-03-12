@@ -10,6 +10,7 @@ class Building extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasFilter;
 
     public function user()
     {

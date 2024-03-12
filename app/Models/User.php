@@ -14,6 +14,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
+    use HasFilter;
 
     /**
      * The attributes that are mass assignable.

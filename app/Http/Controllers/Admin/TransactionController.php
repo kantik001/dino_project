@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Transaction\StoreRequest;
 use App\Http\Requests\Admin\Transaction\UpdateRequest;
+use App\Http\Requests\Filters\Transaction\IndexRequest;
 use App\Http\Resources\Transaction\TransactionResource;
 use App\Models\Transaction;
 use Illuminate\Http\Response;
@@ -14,9 +15,11 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
-        return TransactionResource::collection(Transaction::all())->resolve();
+        $data = $request->validated();
+        $orders = Transaction::filter($data)->get();
+        return TransactionResource::collection($orders)->resolve();
     }
 
     /**

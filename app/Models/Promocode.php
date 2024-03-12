@@ -10,6 +10,7 @@ class Promocode extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasFilter;
 
     protected $casts = [
         'expired_at' => 'date',

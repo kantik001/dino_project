@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Transaction;
+namespace App\Http\Resources\User;
 
+use App\Http\Resources\Profile\ProfileResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TransactionResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,4 +17,5 @@ class TransactionResource extends JsonResource
     {
         return parent::toArray($request);
     }
+
 }

@@ -21,14 +21,45 @@ class ProfileFilter extends AbstractFilter
         'user_id'
     ];
 
-    protected function total(Builder $builder, $value)
+    protected function login(Builder $builder, $value)
     {
-        $builder->where('total', 'like', "%$value%");
+        $builder->where('login', 'like', "%$value%");
     }
 
-    protected function status(Builder $builder, $value)
+    protected function firstName(Builder $builder, $value)
     {
-        $builder->where('status', 'like', "%$value%");
+        $builder->where('first_name', 'like', "%$value%");
+    }
+
+    protected function lastName(Builder $builder, $value)
+    {
+        $builder->where('last_name', 'like', "%$value%");
+    }
+
+    protected function gender(Builder $builder, $value){
+
+        $builder->where('gender', 'like',"%$value%");
+    }
+
+
+    protected function birthedFrom(Builder $builder, $value)
+    {
+        $builder->where('birthed_at', '>=', $value);
+    }
+
+    protected function birthedTo(Builder $builder, $value)
+    {
+        $builder->where('birthed_at', '<=', $value);
+    }
+
+    protected function balanceFrom(Builder $builder, $value)
+    {
+        $builder->where('balance', '>=', $value);
+    }
+
+    protected function balanceTo(Builder $builder, $value)
+    {
+        $builder->where('balance', '<=', $value);
     }
 
 
