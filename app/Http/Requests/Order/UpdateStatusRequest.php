@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Order;
 
 use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateStatusRequest extends FormRequest
@@ -22,9 +23,9 @@ class UpdateStatusRequest extends FormRequest
      */
     public function rules(): array
     {
-        $keys = array_keys(Order::STATUSES);
+        $statuses = implode(',', array_keys(Transaction::STATUSES));
         return [
-            'status' => 'required|integer|in:' . implode(',', $keys)
+            'status' => 'nullable|integer|in:' . $statuses,
         ];
     }
 

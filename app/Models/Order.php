@@ -44,7 +44,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function transactions() {
+    public function transaction()
+    {
         return $this->hasOne(Transaction::class);
     }
 

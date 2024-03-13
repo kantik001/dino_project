@@ -37,8 +37,14 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function orders() {
+    public function order()
+    {
         return $this->belongsTo(Order::class);
+    }
+
+    public function promocode()
+    {
+        return $this->belongsTo(Promocode::class);
     }
 
     public function getFormatValueAttribute()

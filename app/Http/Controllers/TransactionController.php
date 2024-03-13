@@ -23,19 +23,21 @@ class TransactionController extends Controller
     public function updateStatusSuccess(Transaction $transaction, UpdateStatusRequest $request)
     {
         $data = $request->validated();
+
         try {
             DB::beginTransaction();
             $transaction->update([
                 'status' => Transaction::STATUS_SUCCESS
             ]);
 
-            $transaction->user()->profile()->update([
-                'balance' => $transaction->user()->profile->balance + $data['amount'],
+            $transaction->user->profile()->update([
+                'balance' => $transaction->user->profile->balance + $transaction->value,
             ]);
 
             DB::commit();
         } catch (\Exception $exception) {
             $transaction->update([
+
                 'status' => Transaction::STATUS_FAILED
 //                'error_message' = $exception->getMessage()
             ]);

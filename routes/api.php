@@ -30,8 +30,8 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
-Route::group(['middleware' => 'jwt.auth'], function ()
-{
+//Route::group(['middleware' => 'jwt.auth'], function ()
+//{
     Route::post('logout',  [AuthController::class, 'logout']);
     Route::post('refresh',  [AuthController::class, 'refresh']);
     Route::post('me',  [AuthController::class, 'me']);
@@ -53,9 +53,10 @@ Route::group(['middleware' => 'jwt.auth'], function ()
 
     Route::post('/transactions', [\App\Http\Controllers\TransactionController::class, 'store']);
     Route::patch('/transactions/{transaction}/status-success', [\App\Http\Controllers\TransactionController::class, 'updateStatusSuccess']);
+    Route::patch('/transactions/{transaction}/status-external-failed', [\App\Http\Controllers\TransactionController::class, 'updateStatusExternalFailed']);
 
 
-});
+//});
 
 Route::group([ 'prefix' => 'admin'], function ()
 {
