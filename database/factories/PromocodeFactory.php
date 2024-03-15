@@ -21,7 +21,7 @@ class PromocodeFactory extends Factory
             'code'=> fake()->word,
             'value'=> fake()->numberBetween(1,100),
             'expired_at'=> fake()->date,
-            'limit_from'=> fake()->numberBetween(1,100),
+            'limit_from'=> fake()->numberBetween(101,1000),
             'user_id'=> User::inRandomOrder()->first()->id,
 
 

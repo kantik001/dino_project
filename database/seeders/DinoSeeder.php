@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Dino;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,12 +31,11 @@ class DinoSeeder extends Seeder
         foreach ($dinos as $dino) {
             Dino::firstOrCreate(['name' => $dino])->update([
                 'price' => fake()->numberBetween(500, 1000),
-                'description' => fake()->text,
+                'description' => fake()->text(50),
                 'categories' => fake()->century,
                 'discount' => fake()->numberBetween(1, 490),
             ]);
         }
-
     }
 
 }

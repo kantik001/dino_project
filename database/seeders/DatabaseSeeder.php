@@ -18,11 +18,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-           // ProfileSeeder::class,
+            // ProfileSeeder::class,
             OrderSeeder::class,
             TransactionSeeder::class,
             DinoSeeder::class,
-            PromocodeSeeder::class
+            PromocodeSeeder::class,
+            DinoUserSeeder::class
         ]);
 
         // \App\Models\User::factory()->create([

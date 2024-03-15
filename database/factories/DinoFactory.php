@@ -17,31 +17,10 @@ class DinoFactory extends Factory
      */
     public function definition(): array
     {
-        $dinos = [
-            'Диплодок',
-            'Тиранозавр',
-            'Птерадон',
-            'Птерадактиль',
-            'Мезозавр',
-            'Анкилозавр',
-            'Апатозавр',
-            'Стегозавр',
-            'Раптор',
-            'Велоцираптор',
-        ];
 
-
-
-        $names = [];
-
-        foreach ($dinos as $dino) {
-            $names[] = Dino::firstOrCreate($dino)->name;
-        }
-
-        $name = join(',',$names);
 
         return [
-            'name' => $name->unique(),
+
         ];
     }
 }

@@ -44,9 +44,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function transaction()
+    public function transactions()
     {
-        return $this->hasOne(Transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
     public function scopeFailedOrders(Builder $builder, $from, $to)
