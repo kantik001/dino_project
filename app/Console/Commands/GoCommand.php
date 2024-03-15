@@ -32,11 +32,25 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        User::first()->update([
-            'password' => Hash::make('123123123')
-        ]);
-        // $orders = IndexMapper::index($orders);
-        dd(222);
+        $dinos = [
+            'Диплодок',
+            'Тиранозавр',
+            'Птерадон',
+            'Птерадактиль',
+            'Мезозавр',
+            'Анкилозавр',
+            'Апатозавр',
+            'Стегозавр',
+            'Раптор',
+            'Велоцираптор',
+        ];
+
+        $names = [];
+
+        foreach ($dinos as $dino) {
+            $names[] = Dino::firstOrCreate(['name' => $dino]);
+        }
+        dd($names);
 
     }
 }
