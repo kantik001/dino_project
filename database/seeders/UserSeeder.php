@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         $users = User::factory(20)->create();
         $roles = Role::where('title', '!=', 'admin')->get();
         foreach ($users as $user) {
-            $user->roles()->sync($roles->random(2)->pluck('id'));
+            $user->roles()->sync($roles->random());
         }
 
     }

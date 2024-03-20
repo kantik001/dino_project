@@ -18,7 +18,7 @@ class DinoUserSeeder extends Seeder
         $users = User::all();
         $dinos = Dino::where('name', '!=', '0')->get();
         foreach ($users as $user) {
-            $user->dinos()->sync($dinos->random(2)->pluck('id'));
+            $user->dinos()->sync($dinos->random());
         }
     }
 }
