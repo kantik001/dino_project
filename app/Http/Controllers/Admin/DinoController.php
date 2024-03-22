@@ -19,7 +19,8 @@ class DinoController extends Controller
     {
         $data = $request->validated();
         $dinos = Dino::filter($data)->get();
-        return DinoResource::collection($dinos)->resolve();
+        $dinos = DinoResource::collection($dinos)->resolve();
+        return inertia('Admin/Dino/Index', compact('dinos'));
 
     }
 
@@ -36,6 +37,7 @@ class DinoController extends Controller
      */
     public function create()
     {
+        return inertia('Admin/Dino/Create');
 
     }
 

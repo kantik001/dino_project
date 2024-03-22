@@ -1,0 +1,102 @@
+<template>
+    <div>
+        <div class="w-full bg-indigo-200 h-20">
+
+        </div>
+        <div class="flex">
+            <div class="w-1/5 min-h-screen bg-sky-300">
+            </div>
+            <div class="w-3/4">
+                <div class ="w-5/6">
+                    <video muted="" loop="" autoplay="" playsinline="" preload="metadata" style="background-color: rgba(0, 0, 0, 0); display: compact;" onloadedmetadata="this.muted = true"><source src="https://pic.pikbest.com/19/83/27/935888piCM7m.mp4" type="video/mp4"></video>
+                </div>
+                <div class="font-semibold p-4 flex justify-between items-center">
+                    <h1 class="text-lg ">Таблица динозавров</h1>
+                    <span class="relative inline-flex">
+                    <Link :href="route('dinos.create')" class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить динозавра</Link>
+                        <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                        </span>
+                    </span>
+
+                </div>
+                <div class="p-4 dark:border-red-500">
+                    <div class="relative rounded-xl overflow-auto border border-gray-200">
+
+                        <div class="shadow-sm overflow-hidden my-8">
+
+                            <table class="border-collapse table-auto w-full text-sm">
+                                <thead>
+                                <tr class="bg-blue-800">
+                                    <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                        ID
+                                    </th>
+                                    <th class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                        Name
+                                    </th>
+                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                        Description
+                                    </th>
+                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                        Price
+                                    </th>
+                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                        Categories
+                                    </th>
+                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                        Discount
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-slate-800">
+                                <tr v-for="dino in dinos">
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        {{ dino.id }}
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                        {{ dino.name }}
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                        {{ dino.description }}
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                        {{ dino.price }}
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                        {{ dino.categories }}
+                                    </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                        {{ dino.discount }}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div></div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { Link } from "@inertiajs/vue3"
+export default {
+    name: "Index",
+
+    props: ['dinos'],
+
+    components: {
+        Link,
+    },
+
+    mounted() {
+        console.log(this.dinos);
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
+

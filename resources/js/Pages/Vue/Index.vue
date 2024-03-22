@@ -6,7 +6,6 @@
              name: 'Karl',
          }
      },
-
      methods: {
 
      }
@@ -14,7 +13,7 @@
 </script>
 
 <template>
-    Пес Барбос
+    Пес Барбос {{name}}
 </template>
 
 <style scoped>

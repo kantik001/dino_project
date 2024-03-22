@@ -1,6 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\BuildingController;
+use App\Http\Controllers\Admin\DinoController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PromocodeController;
+use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\VueController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +30,17 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::group([ 'prefix' => 'admin'], function ()
+{
+    Route::resource('/dinos', DinoController::class);
+    Route::resource('/buildings', BuildingController::class);
+    Route::resource('/orders', OrderController::class);
+    Route::resource('/profiles', ProfileController::class);
+    Route::resource('/promocodes', PromocodeController::class);
+    Route::resource('/transactions', TransactionController::class)->except('destroy');
+    Route::resource('/users', UserController::class);
 });
 
 Route::get('/vue', [VueController::class, 'index']);
