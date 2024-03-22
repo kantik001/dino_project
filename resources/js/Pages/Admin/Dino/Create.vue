@@ -8,7 +8,7 @@
 
             </div>
             <div class="w-3/4">
-                <div class ="w-5/6">
+                <div class ="w-2/6">
                 <video muted="" loop="" autoplay="" playsinline="" preload="metadata" style="background-color: rgba(0, 0, 0, 0); display: compact;" onloadedmetadata="this.muted = true"><source src="https://pic.pikbest.com/19/58/53/27C888piCHAi.mp4" type="video/mp4"></video>
                 </div>
                 <div class="p-4 flex justify-between items-center">
@@ -72,12 +72,11 @@ export default {
                     this.dino = {}
                     this.storeSuccess = true
                 })
-                .catch(res => {
-
+                .catch(error => {
+                    console.log(error);
+                    this.errored = true;
                 })
-                .finally(res => {
-
-                })
+                .finally(() => (this.loading = false));
         }
     },
 
