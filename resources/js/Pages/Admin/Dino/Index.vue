@@ -96,10 +96,6 @@ export default {
 
     props: ['dinos'],
 
-    mounted() {
-        this.getDino();
-    },
-
     methods:{
         deleteDino(id) {
             if (confirm('Вы уверены?')) {
