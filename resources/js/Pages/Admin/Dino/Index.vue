@@ -13,7 +13,7 @@
                 <div class="font-semibold p-4 flex justify-between items-center">
                     <h1 class="text-lg ">Таблица динозавров</h1>
                     <span class="relative inline-flex">
-                    <Link :href="route('dinos.create')" class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить динозавра</Link>
+                    <Link :href="route('dinos.create')" class="bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Добавить динозавра</Link>
                         <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
@@ -69,6 +69,15 @@
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                         {{ dino.discount }}
                                     </td>
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-red-500 dark:text-red-600">
+
+<!--                                    <DropdownLink as="button" class="bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white" :href="route('dinos.destroy', dino.id)"  method="delete">-->
+<!--                                        Удалить-->
+<!--                                    </DropdownLink>  иной метод удаления-->
+                                    </td>
+                                    <td>
+                                        <a @click.prevent="deleteDino(dino.id)" class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">удалить</a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -81,18 +90,28 @@
 
 <script>
 import { Link } from "@inertiajs/vue3"
+import DropdownLink from '@/Components/DropdownLink.vue'
 export default {
     name: "Index",
 
     props: ['dinos'],
 
-    components: {
-        Link,
+    mounted() {
+        this.getDino();
     },
 
-    mounted() {
-        console.log(this.dinos);
-    }
+    methods:{
+        deleteDino(id) {
+            if (confirm('Вы уверены?')) {
+                this.$inertia.delete(this.route('dinos.destroy', id))
+            }
+        },
+    },
+
+    components: {
+        DropdownLink,
+        Link,
+    },
 }
 </script>
 

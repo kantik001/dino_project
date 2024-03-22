@@ -76,6 +76,7 @@ class DinoController extends Controller
     public function destroy(Dino $dino)
     {
         $dino->delete();
-        return response(Response::HTTP_OK);
+        return redirect(route('dinos.index'));
+        //return response(Response::HTTP_OK);
     }
 }
