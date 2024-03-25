@@ -8,31 +8,25 @@
 
             </div>
             <div class="w-3/4">
-                <div class ="w-2/6">
-                <video muted="" loop="" autoplay="" playsinline="" preload="metadata" style="background-color: rgba(0, 0, 0, 0); display: compact;" onloadedmetadata="this.muted = true"><source src="https://pic.pikbest.com/19/58/53/27C888piCHAi.mp4" type="video/mp4"></video>
-                </div>
                 <div class="p-4 flex justify-between items-center">
-                    <h1 class="text-lg">Добавить дино</h1>
-                    <Link :href="route('dinos.index')" class="inline-block text-xs px-3 py-2 bg-red-500 text-white">Назад</Link>
+                    <h1 class="text-lg">Добавить пользователя</h1>
+                    <Link :href="route('users.index')" class="inline-block text-xs px-3 py-2 bg-red-500 text-white">Назад</Link>
                 </div>
-                <div v-if="storeSuccess && Object.keys(dino).length === 0" class="bg-green-600 text-white p-4">
-                    Динозавр успешно добавлен
+                <div v-if="storeSuccess && Object.keys(user).length === 0" class="bg-green-600 text-white p-4">
+                    Пользователь успешно добавлен
                 </div>
                 <div class="p-4">
                     <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="text" v-model="dino.name" placeholder="name">
+                        <input class="w-1/4 border border-gray-200" type="text" v-model="user.name" placeholder="name">
                     </div>
                     <div class="mb-4">
-                        <textarea class="w-1/4 border border-gray-200" type="number" v-model="dino.description" placeholder="description"></textarea>
+                        <input class="w-1/4 border border-gray-200" type="text" v-model="user.email" placeholder="email">
                     </div>
                     <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="number" v-model="dino.price" placeholder="price">
+                        <input class="w-1/4 border border-gray-200" type="password" v-model="user.password" placeholder="password">
                     </div>
                     <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="text" v-model="dino.categories" placeholder="categories">
-                    </div>
-                    <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="number" v-model="dino.discount" placeholder="discount">
+                        <input class="w-1/4 border border-gray-200" type="password" v-model="user.password_confirmation" placeholder="password_confirmation">
                     </div>
 <!--                    <div class="flex mb-3 items-center">-->
 <!--                        <div>-->
@@ -48,7 +42,7 @@
 <!--                        <img :src="image.url" alt="preview">-->
 <!--                    </div>-->
                     <div class="mb-4">
-                        <a @click.prevent="storeDino" href="#" class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить</a>
+                        <a @click.prevent="storeUser" href="#" class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить</a>
                     </div>
                 </div>
             </div>
@@ -61,11 +55,11 @@ import {Link} from '@inertiajs/vue3'
 export default {
     name: "Index",
 
-    props: ['dinos'],
+    props: ['users'],
 
     data() {
         return {
-            dino: {},
+            user: {},
             storeSuccess: false,
             // image: null,
         }
@@ -76,14 +70,14 @@ export default {
     },
 
     mounted() {
-        console.log(this.dinos);
+        console.log(this.users);
     },
 
     methods: {
-        storeDino() {
-            axios.post('/admin/dinos', this.dino)
+        storeUser() {
+            axios.post('/admin/users', this.user)
                 .then(res => {
-                    this.dino = {}
+                    this.user = {}
                     this.storeSuccess = true
                 })
                 .catch(error => {

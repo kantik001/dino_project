@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Transaction\StoreRequest;
 use App\Http\Requests\Admin\Transaction\UpdateRequest;
 use App\Http\Requests\Filters\Transaction\IndexRequest;
+use App\Http\Resources\Dino\DinoResource;
 use App\Http\Resources\Transaction\TransactionResource;
 use App\Models\Transaction;
 use Illuminate\Http\Response;
@@ -18,8 +19,9 @@ class TransactionController extends Controller
     public function index(IndexRequest $request)
     {
         $data = $request->validated();
-        $orders = Transaction::filter($data)->get();
-        return TransactionResource::collection($orders)->resolve();
+        $transactions = Transaction::filter($data)->get();
+        $transactions = TransactionResource::collection($transactions)->resolve();
+        return inertia('Admin/Transaction/Index', compact('transactions'));
     }
 
     /**
@@ -27,7 +29,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/Transaction/Create');
     }
 
     /**
@@ -53,7 +55,8 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        $transaction = TransactionResource::make($transaction)->resolve();
+        return inertia('Admin/Transaction/Edit', compact('transaction'));
     }
 
     /**
@@ -72,6 +75,6 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();
-        return response(Response::HTTP_OK);
+        return redirect(route('transactions.index'));
     }
 }

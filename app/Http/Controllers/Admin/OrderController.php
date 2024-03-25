@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Order\StoreRequest;
 use App\Http\Requests\Admin\Order\UpdateRequest;
 use App\Http\Requests\Filters\Order\IndexRequest;
+use App\Http\Resources\Dino\DinoImageResource;
 use App\Http\Resources\Dino\DinoResource;
 use App\Http\Resources\Order\OrderResource;
 use App\Models\Dino;
@@ -24,7 +25,8 @@ class OrderController extends Controller
     {
         $data = $request->validated();
         $orders = Order::filter($data)->get();
-        return OrderResource::collection($orders)->resolve();
+        $orders = OrderResource::collection($orders)->resolve();
+        return inertia('Admin/Order/Index', compact('orders'));
     }
 
     /**
@@ -32,7 +34,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/Order/Create');
     }
 
     /**
@@ -58,7 +60,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $order = OrderResource::make($order)->resolve();
+        return inertia('Admin/Order/Edit', compact('order'));
     }
 
     /**
@@ -67,9 +70,8 @@ class OrderController extends Controller
     public function update(UpdateRequest $request, Order $order)
     {
         $data = $request->validated();
-        //$order = $this->orderService->update($order, $data); - другой подход
-        $order = OrderService::update($order, $data);
-        return OrderResource::make($order);
+        $order->update($data);
+        return $order->fresh();
 
     }
 
@@ -79,6 +81,6 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return response(Response::HTTP_OK);
+        return redirect(route('orders.index'));
     }
 }

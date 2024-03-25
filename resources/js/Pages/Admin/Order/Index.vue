@@ -7,13 +7,10 @@
             <div class="w-1/5 min-h-screen bg-sky-300">
             </div>
             <div class="w-3/4">
-<!--                <div class ="w-5/6">-->
-<!--                    <video muted="" loop="" autoplay="" playsinline="" preload="metadata" style="background-color: rgba(0, 0, 0, 0); display: compact;" onloadedmetadata="this.muted = true"><source src="https://pic.pikbest.com/19/83/27/935888piCM7m.mp4" type="video/mp4"></video>-->
-<!--                </div>-->
                 <div class="font-semibold p-4 flex justify-between items-center">
-                    <h1 class="text-lg ">Таблица динозавров</h1>
+                    <h1 class="text-lg ">Таблица ордеров</h1>
                     <span class="relative inline-flex">
-                    <Link :href="route('dinos.create')" class="bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Добавить динозавра</Link>
+                    <Link :href="route('orders.create')" class="bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Добавить ордер</Link>
                         <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
@@ -33,55 +30,45 @@
                                         ID
                                     </th>
                                     <th class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Name
+                                        Total
                                     </th>
                                     <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Description
+                                        Status
                                     </th>
                                     <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Price
-                                    </th>
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Categories
-                                    </th>
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Discount
+                                        User_id
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white dark:bg-slate-800">
-                                <tr v-for="dino in dinos">
+                                <tr v-for="order in orders">
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.id }}
+                                        {{ order.id }}
                                     </td>
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.name }}
+                                        {{ order.total }}
                                     </td>
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                                        {{ dino.description }}
+                                        {{ order.status }}
                                     </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.price }}
+                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                        {{ order.user_id }}
                                     </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.categories }}
-                                    </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.discount }}
-                                    </td>
+<!--                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">-->
+<!--                                        {{ order.user }}-->
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-red-500 dark:text-red-600">
 
-<!--                                    <DropdownLink as="button" class="bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white" :href="route('dinos.destroy', dino.id)"  method="delete">-->
+<!--                                    <DropdownLink as="button" class="bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white" :href="route('orders.destroy', order.id)"  method="delete">-->
 <!--                                        Удалить-->
 <!--                                    </DropdownLink>  иной метод удаления-->
                                     </td>
                                     <td>
-                                        <Link :href="route('dinos.edit', dino.id)"
+                                        <Link :href="route('orders.edit', order.id)"
                                               class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Редактировать
                                         </Link>
                                     </td>
                                     <td>
-                                        <a @click.prevent="deleteDino(dino.id)" class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить</a>
+                                        <a @click.prevent="deleteOrder(order.id)" class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить</a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -99,12 +86,12 @@ import DropdownLink from '@/Components/DropdownLink.vue'
 export default {
     name: "Index",
 
-    props: ['dinos'],
+    props: ['orders'],
 
     methods:{
-        deleteDino(id) {
+        deleteOrder(id) {
             if (confirm('Вы уверены?')) {
-                this.$inertia.delete(this.route('dinos.destroy', id))
+                this.$inertia.delete(this.route('orders.destroy', id))
             }
         },
     },

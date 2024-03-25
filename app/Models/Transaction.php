@@ -27,7 +27,7 @@ class Transaction extends Model
 
     const STATUSES = [
         self::STATUS_CREATED => 'Создана',
-        self::STATUS_SUCCESS => 'Успешно',
+        self::STATUS_SUCCESS => 'Успешна',
         self::STATUS_FAILED => 'Ошибка',
         self::STATUS_EXTERNAL_FAILED => 'Ошибка у платежки',
     ];

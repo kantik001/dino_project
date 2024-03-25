@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Order;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class DinoImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'total'=>'required|integer',
-            'status'=>'required|integer',
-            'user_id'=>'required|integer|exists:users,id',
+            'image' => 'nullable|file'
         ];
     }
 }

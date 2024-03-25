@@ -35,6 +35,7 @@ Route::get('/', function () {
 Route::group([ 'prefix' => 'admin'], function ()
 {
     Route::resource('/dinos', DinoController::class);
+    Route::resource('/dino-images', \App\Http\Controllers\DinoImageController::class);
     Route::resource('/buildings', BuildingController::class);
     Route::resource('/orders', OrderController::class);
     Route::resource('/profiles', ProfileController::class);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Profile\StoreRequest;
 use App\Http\Requests\Admin\Profile\UpdateRequest;
 use App\Http\Requests\Filters\Profile\IndexRequest;
+use App\Http\Resources\Dino\DinoImageResource;
 use App\Http\Resources\Dino\DinoResource;
 use App\Http\Resources\Profile\ProfileResource;
 use App\Models\Dino;
@@ -22,7 +23,8 @@ class ProfileController extends Controller
     {
         $data = $request->validated();
         $profiles = Profile::filter($data)->get();
-        return ProfileResource::collection($profiles)->resolve();
+        $profiles = ProfileResource::collection($profiles)->resolve();
+        return inertia('Admin/Profile/Index', compact('profiles'));
     }
 
     /**
@@ -30,7 +32,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/Profile/Create');
     }
 
     /**
@@ -56,7 +58,8 @@ class ProfileController extends Controller
      */
     public function edit(Profile $profile)
     {
-        //
+        $profile = ProfileResource::make($profile)->resolve();
+        return inertia('Admin/Profile/Edit', compact('profile'));
     }
 
     /**
@@ -75,6 +78,6 @@ class ProfileController extends Controller
     public function destroy(Profile $profile)
     {
         $profile->delete();
-        return response(Response::HTTP_OK);
+        return redirect(route('profiles.index'));
     }
 }

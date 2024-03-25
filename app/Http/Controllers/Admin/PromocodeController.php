@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Promocode\StoreRequest;
 use App\Http\Requests\Admin\Promocode\UpdateRequest;
 use App\Http\Requests\Filters\Promocode\IndexRequest;
+use App\Http\Resources\Dino\DinoResource;
 use App\Http\Resources\Order\OrderResource;
 use App\Http\Resources\Promocode\PromocodeResource;
 use App\Models\Order;
@@ -21,7 +22,8 @@ class PromocodeController extends Controller
     {
         $data = $request->validated();
         $promocodes = Promocode::filter($data)->get();
-        return PromocodeResource::collection($promocodes)->resolve();
+        $promocodes = PromocodeResource::collection($promocodes)->resolve();
+        return inertia('Admin/Promocode/Index', compact('promocodes'));
     }
 
     /**
@@ -29,7 +31,7 @@ class PromocodeController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/Promocode/Create');
     }
 
     /**
@@ -55,7 +57,9 @@ class PromocodeController extends Controller
      */
     public function edit(Promocode $promocode)
     {
-        //
+        $promocode = PromocodeResource::make($promocode)->resolve();
+        return inertia('Admin/Promocode/Edit', compact('promocode'));
+
     }
 
     /**
@@ -74,6 +78,6 @@ class PromocodeController extends Controller
     public function destroy(Promocode $promocode)
     {
         $promocode->delete();
-        return response(Response::HTTP_OK);
+        return redirect(route('promocodes.index'));
     }
 }

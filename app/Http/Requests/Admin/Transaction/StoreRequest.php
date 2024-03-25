@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin\Transaction;
 
+use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -21,9 +23,10 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $statuses = implode(',', array_keys(Transaction::STATUSES));
         return [
             'value'=>'required|numeric',
-            'status'=>'required|integer',
+            'status' => 'nullable|integer|in:' . $statuses,
             'user_id'=>'required|integer|exists:users,id',
             'order_id'=>'required|integer|exists:orders,id',
         ];

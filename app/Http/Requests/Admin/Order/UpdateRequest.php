@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Order;
 
+use App\Models\Order;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -21,9 +22,10 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $statuses = implode(',', array_keys(Order::STATUSES));
         return [
             'total'=>'required|numeric',
-            'product_title'=>'required|string',
+            'status' => 'nullable|integer|in:' . $statuses,
             'user_id'=>'required|integer|exists:users,id',
         ];
     }

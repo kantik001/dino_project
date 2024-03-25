@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Dino\StoreRequest;
 use App\Http\Requests\Admin\Dino\UpdateRequest;
 use App\Http\Requests\Filters\Dino\IndexRequest;
+use App\Http\Resources\Dino\DinoImageResource;
 use App\Http\Resources\Dino\DinoResource;
 use App\Models\Dino;
 use Illuminate\Http\Response;
@@ -38,7 +39,6 @@ class DinoController extends Controller
     public function create()
     {
         return inertia('Admin/Dino/Create');
-
     }
 
     /**
@@ -56,7 +56,9 @@ class DinoController extends Controller
      */
     public function edit(Dino $dino)
     {
-        //
+        $dino = DinoResource::make($dino)->resolve();
+        return inertia('Admin/Dino/Edit', compact('dino'));
+
     }
 
     /**
@@ -77,6 +79,5 @@ class DinoController extends Controller
     {
         $dino->delete();
         return redirect(route('dinos.index'));
-        //return response(Response::HTTP_OK);
     }
 }

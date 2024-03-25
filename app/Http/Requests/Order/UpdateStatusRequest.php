@@ -23,7 +23,7 @@ class UpdateStatusRequest extends FormRequest
      */
     public function rules(): array
     {
-        $statuses = implode(',', array_keys(Transaction::STATUSES));
+        $statuses = implode(',', array_keys(Order::STATUSES));
         return [
             'status' => 'nullable|integer|in:' . $statuses,
         ];

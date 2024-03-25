@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Order;
+namespace App\Http\Resources\Dino;
 
-use App\Http\Resources\Profile\ProfileResource;
-use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResource extends JsonResource
+class DinoImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,6 +14,8 @@ class OrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+        ];
     }
 }
