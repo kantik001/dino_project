@@ -19,10 +19,9 @@ class DinoController extends Controller
     public function index(IndexRequest $request)
     {
         $data = $request->validated();
-        $dinos = Dino::filter($data)->get();
-        $dinos = DinoResource::collection($dinos)->resolve();
+        $dinos = Dino::filter($data)->paginate($data['per_page'],  ['*'], 'page', $data['page']);
+        $dinos = DinoResource::collection($dinos);
         return inertia('Admin/Dino/Index', compact('dinos'));
-
     }
 
     /**

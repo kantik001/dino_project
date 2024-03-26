@@ -1,122 +1,189 @@
 <template>
     <div>
-        <div class="w-full bg-indigo-200 h-20">
-
+        <div class="p-4 flex justify-between items-center bg-blue-300  ">
+            <h1 class="text-lg">Таблица динозавров</h1>
+            <Link :href="route('dinos.create')"
+                  class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить продукт
+            </Link>
         </div>
-        <div class="flex">
-            <div class="w-1/5 min-h-screen bg-sky-300">
+        <div class="p-4 flex items-center justify-between bg-blue-200 ">
+            <div>
+                <input class="border border-pink-300" v-model="filters.name" placeholder="name"  type="text">
             </div>
-            <div class="w-3/4">
-<!--                <div class ="w-5/6">-->
-<!--                    <video muted="" loop="" autoplay="" playsinline="" preload="metadata" style="background-color: rgba(0, 0, 0, 0); display: compact;" onloadedmetadata="this.muted = true"><source src="https://pic.pikbest.com/19/83/27/935888piCM7m.mp4" type="video/mp4"></video>-->
-<!--                </div>-->
-                <div class="font-semibold p-4 flex justify-between items-center">
-                    <h1 class="text-lg ">Таблица динозавров</h1>
-                    <span class="relative inline-flex">
-                    <Link :href="route('dinos.create')" class="bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Добавить динозавра</Link>
-                        <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-                        </span>
-                    </span>
-
+            <div>
+                <input class="w-20 border border-pink-300" v-model="filters.price_from" placeholder="price from"  type="number">
+            </div>
+            <div>
+                <input class="w-20 border border-pink-300" v-model="filters.price_to" placeholder="price to"  type="number">
+            </div>
+            <div>
+                <input class="w-20 border border-pink-300" v-model="filters.discount_from" placeholder="discount from"  type="number">
+            </div>
+            <div>
+                <input class="w-20 border border-pink-300" v-model="filters.discount_to" placeholder="discount to"  type="number">
+            </div>
+            <div>
+                <input class="border border-pink-300" v-model="filters.description" placeholder="description"  type="text">
+            </div>
+            <div>
+                <input class="border border-pink-300" v-model="filters.categories" placeholder="categories"  type="text">
+            </div>
+            <div>
+                <select class="border border-pink-300" v-model="filters.per_page">
+                    <option disabled selected>Страниц</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+            <div>
+                <a @click.prevent="indexDino" class="inline-block text-xs px-3 py-2 bg-sky-500 text-white" href="#">Фильтровать</a>
+            </div>
+            <div>
+                <a @click.prevent="refreshFilters" class="inline-block text-xs px-3 py-2 bg-pink-400 text-white" href="#">Сбросить</a>
+            </div>
+        </div>
+        <div>
+            <div v-for="name in names">
+                {{ name }}
+            </div>
+        </div>
+        <div class="p-4">
+            <div class="relative rounded-xl overflow-auto border border-sky-300">
+                <div class="shadow-sm overflow-hidden my-8">
+                    <table class="border-collapse table-auto w-full text-sm">
+                        <thead>
+                        <tr class="bg-blue-300">
+                            <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                ID
+                            </th>
+                            <th class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                Name
+                            </th>
+                            <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                Description
+                            </th>
+                            <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                Price
+                            </th>
+                            <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                Categories
+                            </th>
+                            <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                Discount
+                            </th>
+                            <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                Actions
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-slate-800">
+                        <tr v-for="dino in dinosData.data">
+                            <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                {{ dino.id }}
+                            </td>
+                            <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                                {{ dino.name }}
+                            </td>
+                            <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                {{ dino.description }}
+                            </td>
+                            <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                {{ dino.price }}
+                            </td>
+                            <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                {{ dino.categories }}
+                            </td>
+                            <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                {{ dino.discount }}
+                            </td>
+                            <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                <Link :href="route('dinos.edit', dino.id)"
+                                      class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Edit
+                                </Link>
+                                <a @click.prevent="deleteDino(dino.id)" class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="p-4 dark:border-red-500">
-                    <div class="relative rounded-xl overflow-auto border border-gray-200">
-
-                        <div class="shadow-sm overflow-hidden my-8">
-
-                            <table class="border-collapse table-auto w-full text-sm">
-                                <thead>
-                                <tr class="bg-blue-800">
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        ID
-                                    </th>
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Name
-                                    </th>
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Description
-                                    </th>
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Price
-                                    </th>
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Categories
-                                    </th>
-                                    <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                        Discount
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody class="bg-white dark:bg-slate-800">
-                                <tr v-for="dino in dinos">
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.id }}
-                                    </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.name }}
-                                    </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                                        {{ dino.description }}
-                                    </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.price }}
-                                    </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.categories }}
-                                    </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                        {{ dino.discount }}
-                                    </td>
-                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-red-500 dark:text-red-600">
-
-<!--                                    <DropdownLink as="button" class="bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white" :href="route('dinos.destroy', dino.id)"  method="delete">-->
-<!--                                        Удалить-->
-<!--                                    </DropdownLink>  иной метод удаления-->
-                                    </td>
-                                    <td>
-                                        <Link :href="route('dinos.edit', dino.id)"
-                                              class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Редактировать
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <a @click.prevent="deleteDino(dino.id)" class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div v-if="dinosData.meta.links.length > 0">
+                    <div>
+                        <a v-for="link in dinosData.meta.links" href="#" class="inline-block mr-2 p-1 border border-gray-200 bg-white text-gray-600" @click.prevent="paginatePage(link)">
+                            {{ link.label }}
+                        </a>
                     </div>
-                </div></div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { Link } from "@inertiajs/vue3"
-import DropdownLink from '@/Components/DropdownLink.vue'
+import {Link} from "@inertiajs/vue3"
+import MainLayout from "@/Layouts/MainLayout.vue";
+
 export default {
     name: "Index",
 
     props: ['dinos'],
 
-    methods:{
+    layout: MainLayout,
+
+    data() {
+        return {
+            dinosData: this.dinos,
+            filters: {}
+        }
+    },
+
+    components: {
+        Link,
+    },
+
+    methods: {
         deleteDino(id) {
             if (confirm('Вы уверены?')) {
                 this.$inertia.delete(this.route('dinos.destroy', id))
             }
         },
+
+        indexDino() {
+            axios.get('/admin/dinos', {
+                params: this.filters
+            })
+                .then(res => {
+                    this.dinosData = res.data
+                })
+        },
+
+        paginatePage(link) {
+            this.filters.page = link.url.split('=')[1]
+            this.indexDino()
+        },
+
+        refreshFilters(){
+            this.filters = {}
+            this.indexDino()
+        },
+
     },
 
-    components: {
-        DropdownLink,
-        Link,
+    computed: {
+        names() {
+            return this.dinosData.data.map(dino => {
+                return dino.title
+            })
+        }
     },
+
+
+    mounted() {
+
+    }
 }
 </script>
 
 <style scoped>
 
 </style>
-

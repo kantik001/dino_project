@@ -22,6 +22,9 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'page' => 'required|integer',
+            'per_page' => 'required|integer',
+
             'name'=> 'nullable|string',
             'description'=> 'nullable|string',
             'price_from'=> 'nullable|numeric',
@@ -33,5 +36,16 @@ class IndexRequest extends FormRequest
             'created_to'=> 'nullable|date_format:Y-m-d',
 
         ];
+
+
     }
+
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'page' => $this->page ?? 1,
+            'per_page' => $this->per_page ?? 10,
+        ]);
+    }
+
 }

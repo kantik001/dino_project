@@ -54,8 +54,6 @@
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                                         {{ order.user_id }}
                                     </td>
-<!--                                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">-->
-<!--                                        {{ order.user }}-->
                                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-red-500 dark:text-red-600">
 
 <!--                                    <DropdownLink as="button" class="bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white" :href="route('orders.destroy', order.id)"  method="delete">-->
