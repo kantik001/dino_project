@@ -7,11 +7,11 @@ export default {
 
 <template>
     <div>
-        <div class="w-full bg-orange-200 h-20">
+        <div class="w-full bg-lime-200 h-20">
 
         </div>
         <div class="flex">
-            <aside class="w-1/6 min-h-screen bg-purple-200">
+            <aside class="w-1/6 min-h-screen bg-green-200">
 
             </aside>
             <article class="w-3/4">

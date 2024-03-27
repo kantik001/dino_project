@@ -32,25 +32,7 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $dinos = [
-            'Диплодок',
-            'Тиранозавр',
-            'Птерадон',
-            'Птерадактиль',
-            'Мезозавр',
-            'Анкилозавр',
-            'Апатозавр',
-            'Стегозавр',
-            'Раптор',
-            'Велоцираптор',
-        ];
 
-        $names = [];
-
-        foreach ($dinos as $dino) {
-            $names[] = Dino::firstOrCreate(['name' => $dino]);
-        }
-        dd($names);
 
     }
 }

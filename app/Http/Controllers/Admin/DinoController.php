@@ -21,6 +21,10 @@ class DinoController extends Controller
         $data = $request->validated();
         $dinos = Dino::filter($data)->paginate($data['per_page'],  ['*'], 'page', $data['page']);
         $dinos = DinoResource::collection($dinos);
+
+        if($request->wantsJson()){
+            return $dinos;
+        }
         return inertia('Admin/Dino/Index', compact('dinos'));
     }
 

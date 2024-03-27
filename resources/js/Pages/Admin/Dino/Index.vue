@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-4 flex justify-between items-center bg-blue-300  ">
+        <div class="p-4 flex justify-between items-center bg-blue-200  ">
             <h1 class="text-lg">Таблица динозавров</h1>
             <Link :href="route('dinos.create')"
                   class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить продукт
@@ -43,17 +43,12 @@
                 <a @click.prevent="refreshFilters" class="inline-block text-xs px-3 py-2 bg-pink-400 text-white" href="#">Сбросить</a>
             </div>
         </div>
-        <div>
-            <div v-for="name in names">
-                {{ name }}
-            </div>
-        </div>
         <div class="p-4">
             <div class="relative rounded-xl overflow-auto border border-sky-300">
                 <div class="shadow-sm overflow-hidden my-8">
-                    <table class="border-collapse table-auto w-full text-sm">
+                    <table class="border-collapse table-auto w-full text-sm ">
                         <thead>
-                        <tr class="bg-blue-300">
+                        <tr class="bg-blue-300 ">
                             <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                 ID
                             </th>
@@ -77,7 +72,7 @@
                             </th>
                         </tr>
                         </thead>
-                        <tbody class="bg-white dark:bg-slate-800">
+                        <tbody class="bg-white dark:bg-slate-800 ">
                         <tr v-for="dino in dinosData.data">
                             <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                                 {{ dino.id }}
@@ -98,10 +93,17 @@
                                 {{ dino.discount }}
                             </td>
                             <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                <div class="flex justify-around">
+
+
                                 <Link :href="route('dinos.edit', dino.id)"
-                                      class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Edit
+                                      class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white ">Edit
                                 </Link>
-                                <a @click.prevent="deleteDino(dino.id)" class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить</a>
+                                <Link method="delete" :href="route('dinos.destroy', dino.id)"
+                                      class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить
+                                </Link>
+                                </div>
+
                             </td>
                         </tr>
                         </tbody>
@@ -114,6 +116,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -143,10 +146,16 @@ export default {
 
     methods: {
         deleteDino(id) {
-            if (confirm('Вы уверены?')) {
-                this.$inertia.delete(this.route('dinos.destroy', id))
-            }
+            if (!confirm('Are u sure?')) return
+            axios.delete(`/admin/dinos/${id}`)
+                .then(res => {
+                    axios.get('/admin/dinos')
+                        .then(res => {
+                            this.dinosData = res.data
+                        })
+                })
         },
+
 
         indexDino() {
             axios.get('/admin/dinos', {
@@ -156,6 +165,7 @@ export default {
                     this.dinosData = res.data
                 })
         },
+
 
         paginatePage(link) {
             this.filters.page = link.url.split('=')[1]
@@ -169,16 +179,17 @@ export default {
 
     },
 
-    computed: {
-        names() {
-            return this.dinosData.data.map(dino => {
-                return dino.title
-            })
-        }
-    },
+    // computed: {
+    //     names() {
+    //         return this.dinosData.data.map(dino => {
+    //             return dino.name
+    //         })
+    //     }
+    // },
 
 
     mounted() {
+        console.log(this.dinosData)
 
     }
 }

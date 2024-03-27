@@ -9,19 +9,19 @@
         </div>
         <div class="p-4">
             <div class="mb-4">
-                <input class="w-1/4 border border-gray-200" type="text" v-model="dino.name" placeholder="name">
+                <input class="w-1/4 border border-gray-500" type="text" v-model="dino.name" placeholder="name">
             </div>
             <div class="mb-4">
-                <textarea class="w-1/4 border border-gray-200" type="number" v-model="dino.description" placeholder="description"></textarea>
+                <textarea class="w-1/4 border border-gray-500" type="number" v-model="dino.description" placeholder="description"></textarea>
             </div>
             <div class="mb-4">
-                <input class="w-1/4 border border-gray-200" type="number" v-model="dino.price" placeholder="price">
+                <input class="w-1/4 border border-gray-500" type="number" v-model="dino.price" placeholder="price">
             </div>
             <div class="mb-4">
-                <input class="w-1/4 border border-gray-200" type="text" v-model="dino.categories" placeholder="categories">
+                <input class="w-1/4 border border-gray-500" type="text" v-model="dino.categories" placeholder="categories">
             </div>
             <div class="mb-4">
-                <input class="w-1/4 border border-gray-200" type="number" v-model="dino.discount" placeholder="discount">
+                <input class="w-1/4 border border-gray-500" type="number" v-model="dino.discount" placeholder="discount">
             </div>
 <!--                    <div class="flex mb-3 items-center">-->
 <!--                        <div>-->

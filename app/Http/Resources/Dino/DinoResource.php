@@ -26,5 +26,6 @@ class DinoResource extends JsonResource
             'path' => $this->path,
             'url' => $this->url,
         ];
+//        return parent::toArray($request);
     }
 }

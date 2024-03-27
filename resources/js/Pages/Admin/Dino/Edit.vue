@@ -13,19 +13,19 @@
                 </div>
                 <div class="p-4">
                     <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="text" v-model="dinoData.name" placeholder="name">
+                        <input class="w-1/4 border border-gray-500" type="text" v-model="dinoData.name" placeholder="name">
                     </div>
                     <div class="mb-4">
-                        <textarea class="w-1/4 border border-gray-200" type="number" v-model="dinoData.description" placeholder="description"></textarea>
+                        <textarea class="w-1/4 border border-gray-500" type="number" v-model="dinoData.description" placeholder="description"></textarea>
                     </div>
                     <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="number" v-model="dinoData.price" placeholder="price">
+                        <input class="w-1/4 border border-gray-500" type="number" v-model="dinoData.price" placeholder="price">
                     </div>
                     <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="text" v-model="dinoData.categories" placeholder="categories">
+                        <input class="w-1/4 border border-gray-500" type="text" v-model="dinoData.categories" placeholder="categories">
                     </div>
                     <div class="mb-4">
-                        <input class="w-1/4 border border-gray-200" type="number" v-model="dinoData.discount" placeholder="discount">
+                        <input class="w-1/4 border border-gray-500" type="number" v-model="dinoData.discount" placeholder="discount">
                     </div>
                     <div class="mb-4">
                         <a @click.prevent="updateDino" href="#" class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Изменить</a>

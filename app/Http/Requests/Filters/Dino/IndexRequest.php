@@ -6,13 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class IndexRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -44,7 +38,7 @@ class IndexRequest extends FormRequest
     {
         return $this->merge([
             'page' => $this->page ?? 1,
-            'per_page' => $this->per_page ?? 10,
+            'per_page' => $this->per_page ?? 5,
         ]);
     }
 
