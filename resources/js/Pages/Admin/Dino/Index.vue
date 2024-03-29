@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="p-4 flex justify-between items-center bg-blue-200  ">
+        <ModalWindow :dino="dino" :is-modal="isModal"></ModalWindow>
+        <div class="p-4 flex justify-between items-center bg-blue-300  ">
             <h1 class="text-lg">Таблица динозавров</h1>
             <Link :href="route('dinos.create')"
                   class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить продукт
@@ -8,28 +9,28 @@
         </div>
         <div class="p-4 flex items-center justify-between bg-blue-200 ">
             <div>
-                <input class="border border-pink-300" v-model="filters.name" placeholder="name"  type="text">
+                <input class="border border-lime-300" v-model="filters.name" placeholder="name"  type="text">
             </div>
             <div>
-                <input class="w-20 border border-pink-300" v-model="filters.price_from" placeholder="price from"  type="number">
+                <input class="w-20 border border-lime-300" v-model="filters.price_from" placeholder="price from"  type="number">
             </div>
             <div>
-                <input class="w-20 border border-pink-300" v-model="filters.price_to" placeholder="price to"  type="number">
+                <input class="w-20 border border-lime-300" v-model="filters.price_to" placeholder="price to"  type="number">
             </div>
             <div>
-                <input class="w-20 border border-pink-300" v-model="filters.discount_from" placeholder="discount from"  type="number">
+                <input class="w-20 border border-lime-300" v-model="filters.discount_from" placeholder="discount from"  type="number">
             </div>
             <div>
-                <input class="w-20 border border-pink-300" v-model="filters.discount_to" placeholder="discount to"  type="number">
+                <input class="w-20 border border-lime-300" v-model="filters.discount_to" placeholder="discount to"  type="number">
             </div>
             <div>
-                <input class="border border-pink-300" v-model="filters.description" placeholder="description"  type="text">
+                <input class="border border-lime-300" v-model="filters.description" placeholder="description"  type="text">
             </div>
             <div>
-                <input class="border border-pink-300" v-model="filters.categories" placeholder="categories"  type="text">
+                <input class="border border-lime-300" v-model="filters.categories" placeholder="categories"  type="text">
             </div>
             <div>
-                <select class="border border-pink-300" v-model="filters.per_page">
+                <select class="border border-lime-300" v-model="filters.per_page">
                     <option disabled selected>Страниц</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -40,15 +41,16 @@
                 <a @click.prevent="indexDino" class="inline-block text-xs px-3 py-2 bg-sky-500 text-white" href="#">Фильтровать</a>
             </div>
             <div>
-                <a @click.prevent="refreshFilters" class="inline-block text-xs px-3 py-2 bg-pink-400 text-white" href="#">Сбросить</a>
+                <a @click.prevent="refreshFilters" class="inline-block text-xs px-3 py-2 bg-red-300 text-white" href="#">Сбросить</a>
             </div>
+
         </div>
         <div class="p-4">
             <div class="relative rounded-xl overflow-auto border border-sky-300">
                 <div class="shadow-sm overflow-hidden my-8">
                     <table class="border-collapse table-auto w-full text-sm ">
                         <thead>
-                        <tr class="bg-blue-300 ">
+                        <tr class="bg-blue-300">
                             <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                 ID
                             </th>
@@ -67,7 +69,7 @@
                             <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                 Discount
                             </th>
-                            <th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                            <th class=" border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                 Actions
                             </th>
                         </tr>
@@ -97,11 +99,14 @@
 
 
                                 <Link :href="route('dinos.edit', dino.id)"
-                                      class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white ">Edit
+                                      class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white ">Редактировать
                                 </Link>
                                 <Link method="delete" :href="route('dinos.destroy', dino.id)"
                                       class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить
                                 </Link>
+                                <a @click.prevent="showModal(dino)" href="#"
+                                       class="cursor-pointer bg-blue-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Показать</a>
+
                                 </div>
 
                             </td>
@@ -110,7 +115,7 @@
                     </table>
                 </div>
                 <div v-if="dinosData.meta.links.length > 0">
-                    <div>
+                    <div >
                         <a v-for="link in dinosData.meta.links" href="#" class="inline-block mr-2 p-1 border border-gray-200 bg-white text-gray-600" @click.prevent="paginatePage(link)">
                             {{ link.label }}
                         </a>
@@ -124,7 +129,8 @@
 
 <script>
 import {Link} from "@inertiajs/vue3"
-import MainLayout from "@/Layouts/MainLayout.vue";
+import MainLayout from "@/Layouts/MainLayout.vue"
+import ModalWindow from "@/Components/ModalWindow.vue"
 
 export default {
     name: "Index",
@@ -136,13 +142,19 @@ export default {
     data() {
         return {
             dinosData: this.dinos,
-            filters: {}
+            filters: {},
+            isModal: false,
+            dino: {},
+
         }
     },
 
     components: {
         Link,
+        ModalWindow
     },
+
+
 
     methods: {
         deleteDino(id) {
@@ -176,6 +188,12 @@ export default {
             this.filters = {}
             this.indexDino()
         },
+
+        showModal(dino) {
+            this.isModal = true
+            this.dino = dino
+        }
+
 
     },
 

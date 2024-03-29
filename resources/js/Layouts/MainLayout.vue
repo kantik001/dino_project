@@ -7,14 +7,13 @@ export default {
 
 <template>
     <div>
-        <div class="w-full bg-lime-200 h-20">
-
+        <div class="w-full bg-white-700 h-10">
+        </div>
+        <div class="w-full bg-green-700 h-10">
         </div>
         <div class="flex">
-            <aside class="w-1/6 min-h-screen bg-green-200">
-
-            </aside>
-            <article class="w-3/4">
+            <aside class="w-1/6 min-h-screen bg-blue-200"></aside>
+            <article class="w-5/6">
                 <slot />
             </article>
         </div>
