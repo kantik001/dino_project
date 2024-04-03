@@ -57,7 +57,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function dinosInCart() {
-        return $this->belongsToMany(Dino::class)->wherePivot('order_id',  null);
+        return $this->belongsToMany(Dino::class)->wherePivot('order_id',  null) ->withPivot('qty');;
     }
 
     public function orderDinos(Order $order) {
@@ -107,5 +107,15 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->roles->pluck('title')->contains('admin');
     }
+
+    public function getTotalPriceInCartAttribute(): int
+    {
+        $total = 0;
+        foreach ($this->dinosInCart as $dino) {
+            $total += (int) $dino->price * $dino->pivot->qty;
+        }
+        return $total;
+    }
+
 
 }

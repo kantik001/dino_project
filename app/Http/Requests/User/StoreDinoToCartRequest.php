@@ -23,7 +23,7 @@ class StoreDinoToCartRequest extends FormRequest
     {
         return [
             'dino_id' => 'required|integer|exists:dinos,id',
-            'qty' => 'required|integer|min:1'
+            'qty' => 'nullable|integer|min:1'
         ];
     }
 }

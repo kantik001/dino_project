@@ -20,6 +20,7 @@ class StoreUserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'profile' => ProfileResource::make($this->profile)->resolve(),
+            'total_in_cart' => $this->totalPriceInCart
 
         ];
     }

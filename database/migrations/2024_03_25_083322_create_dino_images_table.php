@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('path');
             $table->foreignId('dino_id')->index()->nullable()->constrained('dinos');
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+//            $table->foreignId('user_id')->index()->nullable()->constrained('users');
             $table->boolean('status')->default(false);
 
             $table->timestamps();

@@ -16,6 +16,7 @@ class DinoImageResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'url' => $this->url,
         ];
     }
 }

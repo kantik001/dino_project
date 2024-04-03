@@ -39,11 +39,13 @@ class UserController extends Controller
         ], Response::HTTP_OK);
     }
 
+
     public function storeDinoToCart(StoreDinoToCartRequest $request)
     {
         $data = $request->validated();
         auth()->user()->dinosInCart()->syncWithoutDetaching([$data['dino_id'] => $data]);
-        return response()->json(['message' => 'Дино добавлен'], Response::HTTP_OK);
+        return response()->json(['message' => 'Продукт добавлен', 'total' => User::find('user_id', auth()->id())->first()->totalPriceInCart], Response::HTTP_OK);
+
     }
 
     public function updateDinoInCart(UpdateDinoToCartRequest $request)

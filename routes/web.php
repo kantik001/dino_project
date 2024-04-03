@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PromocodeController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\ReferencesController;
 use App\Http\Controllers\VueController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,15 @@ Route::group([ 'prefix' => 'admin'], function ()
     Route::resource('/promocodes', PromocodeController::class);
     Route::resource('/transactions', TransactionController::class)->except('destroy');
     Route::resource('/users', UserController::class);
+});
+
+Route::group(['middleware' => 'auth'], function ()
+{
+    Route::get('/dinos', [\App\Http\Controllers\DinoController::class, 'index']);
+    Route::post('/users/dino-to-cart', [\App\Http\Controllers\UserController::class, 'storeDinoToCart']);
+    Route::patch('/users/dino-in-cart', [\App\Http\Controllers\UserController::class, 'updateDinoInCart']);
+    Route::delete('/users/dino-in-cart', [\App\Http\Controllers\UserController::class, 'destroyDinoInCart']);
+    Route::get('/references/total', [ReferencesController::class, 'total']);
 });
 
 Route::get('/vue', [VueController::class, 'index']);

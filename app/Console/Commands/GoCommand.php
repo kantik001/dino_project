@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Resources\Dino\DinoResource;
 use App\Mappers\IndexMapper;
 use App\Models\Dino;
 use App\Models\Order;
@@ -32,6 +33,9 @@ class GoCommand extends Command
      */
     public function handle()
     {
+        $dinos = Dino::all();
+        $dinos = DinoResource::collection($dinos)->resolve();
+        $total = auth()->user()->totalPriceInCart;
 
 
     }

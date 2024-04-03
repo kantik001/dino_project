@@ -20,7 +20,8 @@ class StoreWithTokenUserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'profile' => ProfileResource::make($this->profile)->resolve(),
-            'token' => auth()->attempt(request(['email', 'password']))
+            'token' => auth()->attempt(request(['email', 'password'])),
+            'total_in_cart' => $this->totalPriceInCart
         ];
     }
 

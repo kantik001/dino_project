@@ -66,6 +66,8 @@ export default {
     top: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
+    display: flex;
+    align-items: center;
 }
 
 .box {

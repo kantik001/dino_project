@@ -4,7 +4,7 @@
         <div class="p-4 flex justify-between items-center bg-blue-300  ">
             <h1 class="text-lg">Таблица динозавров</h1>
             <Link :href="route('dinos.create')"
-                  class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить продукт
+                  class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить дино
             </Link>
         </div>
         <div class="p-4 flex items-center justify-between bg-blue-200 ">
@@ -129,7 +129,7 @@
 
 <script>
 import {Link} from "@inertiajs/vue3"
-import MainLayout from "@/Layouts/MainLayout.vue"
+import AdminLayout from "@/Layouts/AdminLayout.vue"
 import ModalWindow from "@/Components/ModalWindow.vue"
 
 export default {
@@ -137,7 +137,7 @@ export default {
 
     props: ['dinos'],
 
-    layout: MainLayout,
+    layout: AdminLayout,
 
     data() {
         return {

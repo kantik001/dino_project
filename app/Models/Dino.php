@@ -39,5 +39,10 @@ class Dino extends Model
         return number_format($this->discount, 2);
     }
 
+    public function images() {
+        return $this->hasMany(DinoImage::class);
+    }
+
+
 
 }

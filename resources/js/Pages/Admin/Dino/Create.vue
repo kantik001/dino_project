@@ -45,11 +45,11 @@
 
 <script>
 import {Link} from '@inertiajs/vue3'
-import MainLayout from "@/Layouts/MainLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 export default {
     name: "Index",
 
-    layout: MainLayout,
+    layout: AdminLayout,
 
     props: ['dinos'],
 
