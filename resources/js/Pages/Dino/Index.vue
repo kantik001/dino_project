@@ -2,7 +2,7 @@
     <div class="p-4">
         <div class="mb-4 flex justify-between items-center">
             <h3>Dinos</h3>
-            <div>{{ totalData }}</div>
+            <div>Общая сумма товаров: {{ totalData }}</div>
         </div>
         <div class="grid grid-cols-4 gap-4 dark:border-sky-300 dark:text-black-500">
             <Dino @storeToCart="changeTotal" v-for="dino in dinosData" :dino="dino" />
