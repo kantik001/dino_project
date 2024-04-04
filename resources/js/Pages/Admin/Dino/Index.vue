@@ -1,24 +1,14 @@
 <template>
-    <div v-show="!visible">
-        <div class="w-full bg-white-700 h-10">
-        </div>
-        <div class="w-full bg-blue-700 h-10">
-        </div>
-        <div class="w-full bg-red-700 h-10">
-        </div>
-    </div>
-    <div>
-        <button @click="toggle" class="inline-block text-xs px-3 py-2 bg-sky-400 text-white">Patriot edition</button>
-    </div>
+
     <div>
         <ModalWindow :dino="dino" :is-modal="isModal"></ModalWindow>
-        <div class="p-4 flex justify-between items-center bg-blue-300  ">
-            <h1 class="text-lg">Таблица динозавров</h1>
+        <div @click="setDone" class="cursor-pointer p-4 flex justify-between items-center bg-blue-300 focus:outline-none hover:bg-violet-300 ">
+            <h1 :class="styles" >Таблица динозавров</h1>
             <Link :href="route('dinos.create')"
                   class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить дино
             </Link>
         </div>
-        <div class="p-4 flex items-center justify-between bg-blue-200 " @click="toggle">
+        <div class="p-4 flex items-center justify-between bg-blue-200 " >
             <div>
                 <input class="border border-lime-300" v-model="filters.name" placeholder="name"  type="text">
             </div>
@@ -51,6 +41,7 @@
             <div>
                 <a @click.prevent="indexDino" class="inline-block text-xs px-3 py-2 bg-sky-500 text-white" href="#">Фильтровать</a>
             </div>
+
             <div>
                 <a @click.prevent="refreshFilters" class="inline-block text-xs px-3 py-2 bg-red-300 text-white" href="#">Сбросить</a>
             </div>
@@ -155,8 +146,10 @@ export default {
             dinosData: this.dinos,
             filters: {},
             isModal: false,
-            visible: true,
             dino: {},
+            styles: {
+                done: false,
+            },
         }
     },
 
@@ -177,8 +170,8 @@ export default {
                 })
         },
 
-        toggle: function() {
-            this.visible = !this.visible;
+        setDone: function() {
+            this.styles.done = !this.styles.done;
         },
 
         indexDino() {
@@ -224,5 +217,18 @@ export default {
 </script>
 
 <style scoped>
-
+.done {
+    display: inline-block;
+    cursor: pointer;
+    padding: .75rem 1.25rem;
+    border-radius: 10rem;
+    color: #090808;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1
+}
 </style>
