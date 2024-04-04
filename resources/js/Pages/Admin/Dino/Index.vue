@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!visible">
+    <div v-show="!visible">
         <div class="w-full bg-white-700 h-10">
         </div>
         <div class="w-full bg-blue-700 h-10">
