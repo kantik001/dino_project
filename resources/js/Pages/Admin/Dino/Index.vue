@@ -1,4 +1,15 @@
 <template>
+    <div v-if="!visible">
+        <div class="w-full bg-white-700 h-10">
+        </div>
+        <div class="w-full bg-blue-700 h-10">
+        </div>
+        <div class="w-full bg-red-700 h-10">
+        </div>
+    </div>
+    <div>
+        <button @click="toggle" class="inline-block text-xs px-3 py-2 bg-sky-400 text-white">Patriot edition</button>
+    </div>
     <div>
         <ModalWindow :dino="dino" :is-modal="isModal"></ModalWindow>
         <div class="p-4 flex justify-between items-center bg-blue-300  ">
@@ -7,7 +18,7 @@
                   class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить дино
             </Link>
         </div>
-        <div class="p-4 flex items-center justify-between bg-blue-200 ">
+        <div class="p-4 flex items-center justify-between bg-blue-200 " @click="toggle">
             <div>
                 <input class="border border-lime-300" v-model="filters.name" placeholder="name"  type="text">
             </div>
@@ -98,13 +109,13 @@
                                 <div class="flex justify-around">
 
 
-                                <Link :href="route('dinos.edit', dino.id)"
-                                      class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white ">Редактировать
-                                </Link>
-                                <Link method="delete" :href="route('dinos.destroy', dino.id)"
-                                      class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить
-                                </Link>
-                                <a @click.prevent="showModal(dino)" href="#"
+                                    <Link :href="route('dinos.edit', dino.id)"
+                                          class="cursor-pointer bg-green-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white ">Редактировать
+                                    </Link>
+                                    <Link method="delete" :href="route('dinos.destroy', dino.id)"
+                                          class="cursor-pointer bg-red-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Удалить
+                                    </Link>
+                                    <a @click.prevent="showModal(dino)" href="#"
                                        class="cursor-pointer bg-blue-500 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">Показать</a>
 
                                 </div>
@@ -144,8 +155,8 @@ export default {
             dinosData: this.dinos,
             filters: {},
             isModal: false,
+            visible: true,
             dino: {},
-
         }
     },
 
@@ -153,8 +164,6 @@ export default {
         Link,
         ModalWindow
     },
-
-
 
     methods: {
         deleteDino(id) {
@@ -168,6 +177,9 @@ export default {
                 })
         },
 
+        toggle: function() {
+            this.visible = !this.visible;
+        },
 
         indexDino() {
             axios.get('/admin/dinos', {
@@ -205,10 +217,8 @@ export default {
     //     }
     // },
 
-
     mounted() {
         console.log(this.dinosData)
-
     }
 }
 </script>

@@ -36,8 +36,8 @@
 <!--                    <div v-if="image">-->
 <!--                        <img :src="image.url" alt="preview">-->
 <!--                    </div>-->
-            <div class="mb-4">
-                <a @click.prevent="storeDino" href="#" class="inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить</a>
+            <div class="test">
+                <a @click.prevent="storeDino" href="#" class=" inline-block text-xs px-3 py-2 bg-green-600 text-white">Добавить</a>
             </div>
         </div>
     </div>
@@ -103,5 +103,7 @@ export default {
 </script>
 
 <style scoped>
-
+.test{
+    margin-bottom: auto;
+}
 </style>
