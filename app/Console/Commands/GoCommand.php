@@ -33,10 +33,6 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $dinos = Dino::all();
-        $dinos = DinoResource::collection($dinos)->resolve();
-        $total = auth()->user()->totalPriceInCart;
-
 
     }
 }
